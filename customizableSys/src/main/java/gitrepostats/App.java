@@ -672,9 +672,16 @@ public class App implements Api {
 		// 将结果保存为JSON
 		jsonFile = new File(file, "/src/json/result.json");
 		writeToFile(jsonFile, JsonUtils.toString(result));
+		//打印result
+		System.out.print(JsonUtils.toString(result));
+		System.out.println();
+		
+		// 将结果保存为CSV
 		File csvFile = new File(file, "/src/json/result.csv");
 		writeToFile(csvFile, sb.toString());
-
+		//打印sb
+		System.out.print(sb.toString());
+		System.out.println();
 		// 打印Issue标题
 		for (String title : issueTitleList) {
 			System.out.println(title);
@@ -698,11 +705,13 @@ public class App implements Api {
 			} else {
 				showKey += "\t\t\t\t";
 			}
+			//number
 			System.out.print(showKey);
 			if (stats.number == null) {
 				stats.number = "0000000000000";
 			}
 			System.out.print(stats.number + "\t\t");
+			//Issue  和  Events
 			if (stats.issues != null && stats.issues.size() > 0) {
 				System.out.print(stats.issues.get(0).number + "\t\t");
 				System.out.print(stats.issues.get(0).eventCount + "\t\t");
@@ -710,16 +719,19 @@ public class App implements Api {
 				System.out.print("0\t\t");
 				System.out.print("0\t\t");
 			}
+			//Pulls
 			if (stats.pulls != null && stats.pulls.size() > 0) {
 				System.out.print(stats.pulls.size() + "\t\t");
 			} else {
 				System.out.print("0\t\t");
 			}
+			//Commits
 			if (stats.commits != null && stats.commits.size() > 0) {
 				System.out.print(stats.commits.size() + "\t\t");
 			} else {
 				System.out.print("0\t\t");
 			}
+			
 			System.out.println();
 		}
 		System.out.println("学生人数：" + allData.keySet().size());

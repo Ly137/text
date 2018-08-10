@@ -2,7 +2,7 @@ package bean;
 
 public class Teacher {
 	private int id;
-	private String tName,tNo,sex,tPhone,tAddr,tPwd,login;
+	private String tName,tNo,sex,tPhone,tAddr,tPwd,login,gitUsername,TOKEN,CLIENT_ID,CLIENT_SECRET;
 	public int getId() {
 		return id;
 	}
@@ -50,6 +50,30 @@ public class Teacher {
 	}
 	public void setLogin(String login) {
 		this.login = login;
+	}
+	public String getGitUsername() {
+		return gitUsername;
+	}
+	public void setGitUsername(String gitUsername) {
+		this.gitUsername = gitUsername;
+	}
+	public String getTOKEN() {
+		return TOKEN;
+	}
+	public void setTOKEN(String tOKEN) {
+		TOKEN = tOKEN;
+	}
+	public String getCLIENT_ID() {
+		return CLIENT_ID;
+	}
+	public void setCLIENT_ID(String cLIENT_ID) {
+		CLIENT_ID = cLIENT_ID;
+	}
+	public String getCLIENT_SECRET() {
+		return CLIENT_SECRET;
+	}
+	public void setCLIENT_SECRET(String cLIENT_SECRET) {
+		CLIENT_SECRET = cLIENT_SECRET;
 	}
 	
 }

@@ -24,7 +24,7 @@ import utils.JsonUtils;
  * 统计一个Repo下贡献者的数据。
  */
 public class App implements Api {
-
+	
 	static boolean hasCommitsDir = false;
 	static boolean hasPullsDir = false;
 	static boolean hasCommentsDir = false;
@@ -824,6 +824,7 @@ public class App implements Api {
 	}
 }
 
+/*
 class Stats {
 	String number;
 	String login;
@@ -861,4 +862,4 @@ class Event {
 	String name;
 	String actor;
 	String time;
-}
+}*/

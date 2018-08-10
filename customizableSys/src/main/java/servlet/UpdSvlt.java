@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.wm.utils.DbConn;
+import com.wm.utils.GetList;
 
+import bean.Teacher;
 import net.sf.json.JSONObject;
 import utils.Dbhelper;
 
@@ -237,6 +240,8 @@ public class UpdSvlt extends HttpServlet {
 				String newpwd=request.getParameter("newpwd");
 				String tphone=request.getParameter("tphone");
 				String flag=request.getParameter("flag");
+				
+				
 				System.out.print("id="+id+";name="+name+";newpwd="+newpwd+";tphone="+tphone+";flag="+flag);
 				if("pwd".equals(flag)) {
 					int bls=db.executeUpdate("update teacher set tName='"+name+"',tPwd='"+newpwd+"' where id="+id);
@@ -245,11 +250,38 @@ public class UpdSvlt extends HttpServlet {
 					}else{
 						json.put("msg", "修改失败");
 					}
-				}else {
+				}else if("git".equals(flag)) {
+					//git账号参数
+					String gitUsername=request.getParameter("gitUsername");
+					String TOKEN=request.getParameter("TOKEN");
+					String CLIENT_ID=request.getParameter("CLIENT_ID");
+					String CLIENT_SECRET=request.getParameter("CLIENT_SECRET");
+					System.out.print("gitUsername="+gitUsername);
+					int bls=db.executeUpdate("update teacher set gitUsername='"+gitUsername+"',TOKEN='"+TOKEN+"',CLIENT_ID='"+CLIENT_ID+"',CLIENT_SECRET='"+CLIENT_SECRET+"' where id="+id);
+					if(bls>0){
+						Teacher ad=new Teacher();
+						List<Teacher> alist=GetList.getlist(Teacher.class, db.executeQuery("select * from teacher where id="+id));
+						if(alist.size()>0){
+							ad=alist.get(0);
+						}
+						session.setAttribute("userinfo", ad);
+						json.put("msg", "修改成功");
+						
+					}else{
+						json.put("msg", "修改失败");
+					}
+				}
+				else {
 					int bls=db.executeUpdate("update teacher set tPhone='"+tphone+"' where id="+id);
 					if(bls>0){
+						Teacher ad=new Teacher();
+						List<Teacher> alist=GetList.getlist(Teacher.class, db.executeQuery("select * from teacher where id="+id));
+						if(alist.size()>0){
+							ad=alist.get(0);
+						}
+						session.setAttribute("userinfo", ad);
 						json.put("msg", "修改成功");
-						json.put("tphone",tphone);
+						
 					}else{
 						json.put("msg", "修改失败");
 					}

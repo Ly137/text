@@ -5,7 +5,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+<link href="../jqueryUIcustom/css/base/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+<script src="../jqueryUIcustom/js/jquery-1.8.3.js"></script>
+<script src="../jqueryUIcustom/js/jquery-ui-1.9.2.custom.js"></script>
 <title>学生个人信息</title>
+<script>
+  $(function() {
+    $( "#tabs" ).tabs();
+  });
+  </script>
+
 <style>
 	p{
 		text-align:center;
@@ -24,28 +33,36 @@
 </style>
 </head>
 <body>
-	<div class="form">	
-	<form >	
+	<div id="tabs">
+	  <ul>
+	    <li><a href="#tabs-1">基本信息</a></li>
+	    <li><a href="#tabs-2">修改密码</a></li>
+	  </ul>
+	  <div id="tabs-1">
+	  	<form >	
 		  <input type='hidden' name='num' id="num" value="${userinfo.id}" >
 		   <input type='hidden' name='pwd' id="pwd" value="${userinfo.spassword}" >
-	  <p>  学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：<input type='text' name='no' id="no" value="${userinfo.sno}" disabled="disabled" > </p>
-	  <p>  姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：<input type='text' name='name' id="name" value="${userinfo.sname}"  disabled="disabled"> </p>
-	  <p>  班&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级：<input type='text' name='classname' id="classname" value="${userinfo.classname }"  disabled="disabled"> </p>
-	  <p>  性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：<input type='text' name='sgender' id="sgender"  value="${userinfo.sgender }" disabled="disabled"> </p>
-	  <p>  电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：<input type='text' name='sphone' id="sphone" value="${userinfo.sphone }" > </p>	  	 	 
-	  <p style="text-align:center;"><input type='button' value='更新' onclick="Submit()">
-	  <input type='button' value='修改密码' onclick="showChangePwd()">
-	  </p>
+		  <p>  学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：<input type='text' name='no' id="no" value="${userinfo.sno}" disabled="disabled" > </p>
+		  <p>  姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：<input type='text' name='name' id="name" value="${userinfo.sname}"  disabled="disabled"> </p>
+		  <p>  班&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级：<input type='text' name='classname' id="classname" value="${userinfo.classname }"  disabled="disabled"> </p>
+		  <p>  性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：<input type='text' name='sgender' id="sgender"  value="${userinfo.sgender }" disabled="disabled"> </p>
+		  <p>  电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：<input type='text' name='sphone' id="sphone" value="${userinfo.sphone }" > </p>	  	 	 
+		  <p style="text-align:center;"><input type='button' value='更新' onclick="Submit()">
+		 
+	 	 </p>
 	    
-	</form>
-	
-	<form style="display:none;" class="form2">
-		<p>  原始密码：<input type='password' name='oldPwd' id="oldPwd" onblur="ckOldPwd(this)"> </p>	  
-	    <p>  新&nbsp;&nbsp;密&nbsp;&nbsp;码：<input type='password' name='newPwd'  id="newPwd"  >  </p>	 
-	    <p>  确认密码：<input type='password' name='ckNewPwd' id="ckNewPwd"  > </p>	
-	    <p style="text-align:center;"><input type='button' value='更新' onclick="SubmitPwd()"></p>
-	</form>
+		</form>
+	  </div>
+	   <div id="tabs-2">
+	   		<form  class="form2">
+				<p>  原始密码：<input type='password' name='oldPwd' id="oldPwd" onblur="ckOldPwd(this)"> </p>	  
+			    <p>  新&nbsp;&nbsp;密&nbsp;&nbsp;码：<input type='password' name='newPwd'  id="newPwd"  >  </p>	 
+			    <p>  确认密码：<input type='password' name='ckNewPwd' id="ckNewPwd"  > </p>	
+			    <p style="text-align:center;"><input type='button' value='更新' onclick="SubmitPwd()"></p>
+			</form>
+	  </div>
 	</div>
+	
 	
 	<script type="text/javascript">
 	//检查是否知道原始密码

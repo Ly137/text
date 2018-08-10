@@ -4,6 +4,8 @@
  */
 package gitrepostats;
 
+
+
 /**
  * GitHub Api路径。
  * 
@@ -11,6 +13,8 @@ package gitrepostats;
  * @since 8.0
  */
 public interface Api {
+	
+	
 	public static final String HTTPS = "https://";
 	public static final String GIT = "api.github.com";
 	public static final String LOGIN = "https://api.github.com/user";
@@ -51,5 +55,7 @@ public interface Api {
 	public static final String PER_PAGE = "per_page=";
 	public static final String PAGE = "page=";
 	/** 老师的帐号 */
+	
 	public static final String LOGIN_TEACHER = "zengsn";  //
+	
 }

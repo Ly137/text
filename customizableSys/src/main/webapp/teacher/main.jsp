@@ -125,8 +125,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   <a href="<%=basePath %>InitSvlt?flgs=1&tbname=tshiyan"  target='SubMenu'> 
 		      <img src="../images/link.png" width=15 height=15  border=1>实验管理
 		   </a><br>
-		   <a href="<%=basePath %>/teacher/GitMana.jsp"  target='SubMenu'> 
-		      <img src="../images/link.png" width=15 height=15  border=1>GitHub实验管理
+		   <a href="<%=basePath %>InitSvlt?flgs=1&tbname=tGitmana"  target='SubMenu'> 
+		      <img src="../images/link.png" width=15 height=15  border=1>统计GitHub实验信息
+		   </a><br>
+		   <a href="<%=basePath %>InitSvlt?flgs=1&tbname=tGitDate"  target='SubMenu'> 
+		      <img src="../images/link.png" width=15 height=15  border=1>GitHub实验信息管理
 		   </a><br>
 		   <a href="<%=basePath %>InitSvlt?flgs=1&tbname=Tscore"  target='SubMenu'> 
 		      <img src="../images/link.png" width=15 height=15  border=1>成绩管理

@@ -22,6 +22,7 @@ import bean.user;
 
 import bean.Course;
 import bean.CoursePlan;
+import bean.GitDate;
 import bean.Students;
 import bean.Stutask;
 import bean.TeaTask;
@@ -291,6 +292,41 @@ public class InitSvlt extends HttpServlet {
 				request.getRequestDispatcher("/teacher/score.jsp").forward(request, response);
 				return;
 			}
+			
+			
+			if("tGitmana".equals(tbname)){		//教师git实验管理--录入数据
+				
+				List<Terms> termslist=GetList.getlist(Terms.class, db.executeQuery("select * from terms"));
+				request.setAttribute("termslist", termslist);
+				
+				List<Course> courselist=GetList.getlist(Course.class, db.executeQuery("select * from course"));
+				request.setAttribute("courselist", courselist);
+				
+				request.getRequestDispatcher("/teacher/GitMana.jsp").forward(request, response);
+				return;
+			}
+			if("tGitDate".equals(tbname)){		//教师git实验管理--查看数据
+				String tablename="repos"+userid;   
+				//定义查询语句变量
+				String sql="";
+				//如果请求来自左侧菜单，查询全部内容
+				if("1".equals(flgs)){
+					session.setAttribute("sql", "select "+tablename+".*,students.sname, terms.termname,course.cname from "+tablename+",students,course,terms where  students.sno=Num and course_id=course.id and repos1.terms_id=terms.id  order by Num ASC");
+				}
+				//查询结果集转化成链表
+				List<GitDate> alist=GetList.getlist(GitDate.class, HandlePage.Sy(db, "100", session,"sql","mysql"));
+				System.out.print("size="+alist.size());
+				//查询结果传到前台
+				request.setAttribute("alist", alist);
+				List<Terms> termslist=GetList.getlist(Terms.class, db.executeQuery("select * from terms"));
+				request.setAttribute("termslist", termslist);
+				
+				List<Course> courselist=GetList.getlist(Course.class, db.executeQuery("select * from course"));
+				request.setAttribute("courselist", courselist);
+				request.getRequestDispatcher("/teacher/GitDate.jsp").forward(request, response);
+				return;
+			}
+			
 		/**
 		 * 学生页面操作处理		
 		 */

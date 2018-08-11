@@ -41,7 +41,11 @@ public class CreateTable {
       		"  `ChangedFiles` int(11) DEFAULT NULL," + 
       		"  `Comments` int(11) DEFAULT NULL," + 
       		"  `ReviewComments` int(11) DEFAULT NULL," + 
-      		"  `reposname` varchar(100) DEFAULT NULL," + 
+      		"  `org` varchar(100) DEFAULT NULL," + 
+      		"  `proj` varchar(100) DEFAULT NULL," +
+      		"  `terms_id` int(11) DEFAULT NULL," +
+      		"  `course_id` int(11) DEFAULT NULL," +
+      		"  `score` float DEFAULT NULL," +
       		"  PRIMARY KEY (`id`)," + 
       		"  UNIQUE KEY `id_UNIQUE` (`id`)" + 
       		") ENGINE=InnoDB DEFAULT CHARSET=utf8";

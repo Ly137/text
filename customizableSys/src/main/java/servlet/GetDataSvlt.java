@@ -20,6 +20,7 @@ import bean.navList;
 import net.sf.json.JSONObject;
 import bean.Course;
 import bean.CoursePlan;
+import bean.GitDate;
 import bean.Students;
 import bean.Stutask;
 import bean.TeaTask;
@@ -244,6 +245,31 @@ public class GetDataSvlt extends HttpServlet {
 			request.getRequestDispatcher("/teacher/TaskHistoryinfo.jsp").forward(request, response);
 			return;
 		}
+		if("newgit".equals(tbname)){	//获取新导入的GitHub实验信息
+			
+			//获取当前登录用户信息
+			//Object userid=session.getAttribute("userid");
+			String org=request.getParameter("org");
+			String proj=request.getParameter("proj");
+			String userid=request.getParameter("id");
+			String tablename="repos"+userid;   
+			session.setAttribute("sql", "select "+tablename+".*,students.sname, terms.termname,course.cname from "+tablename+",students,course,terms where  students.sno=Num and course_id=course.id and repos1.terms_id=terms.id and org='"+org+"' and proj='"+proj+"'");
+			
+			//查询结果集转化成链表
+			List<GitDate> alist=GetList.getlist(GitDate.class, HandlePage.Sy(db, "100", session,"sql","mysql"));
+			System.out.print("size="+alist.size());
+			//查询结果传到前台
+			request.setAttribute("alist", alist);
+			List<Terms> termslist=GetList.getlist(Terms.class, db.executeQuery("select * from terms"));
+			request.setAttribute("termslist", termslist);
+			
+			List<Course> courselist=GetList.getlist(Course.class, db.executeQuery("select * from course"));
+			request.setAttribute("courselist", courselist);
+			request.getRequestDispatcher("/teacher/GitDate.jsp").forward(request, response);
+			return;
+		}
+		
+		
 		/**
 		 * 
 		 * 学生功能相关操作

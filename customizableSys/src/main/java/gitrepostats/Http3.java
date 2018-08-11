@@ -25,6 +25,7 @@ import bean.Api;
  * @since 8.0
  */
 public class Http3 implements Api3 {
+	
 	public static String get(String url,Api api) {
 		String USERNAME =api.getUSERNAME();
 		String TOKEN=api.getTOKEN();
@@ -52,7 +53,7 @@ public class Http3 implements Api3 {
 					HttpEntity entity = response.getEntity();
 					return entity != null ? EntityUtils.toString(entity) : null;
 				} else {
-					throw new ClientProtocolException("Unexpected response status: " + status);
+					throw new ClientProtocolException("Unexpected response status: " + status);					
 				}
 			}
 
@@ -71,6 +72,7 @@ public class Http3 implements Api3 {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return null;
 	}
 }

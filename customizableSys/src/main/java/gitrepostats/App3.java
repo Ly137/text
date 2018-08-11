@@ -72,6 +72,7 @@ public class App3 implements Api3 {
 				System.out.println("Sleep at " + new Date());
 				Thread.sleep(61 * 60 * 1000);
 				runAndRun(api); // run again
+				
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}
@@ -94,6 +95,7 @@ public class App3 implements Api3 {
 			int pages = 1;
 			String resp = Http3.get(url + pages,api);
 			if (resp == null) { // 限制到了，应该停一个小时
+				
 				throw new RuntimeException("Take a rest for one hour!");
 			}
 			while (resp != null && resp.startsWith("[")) {

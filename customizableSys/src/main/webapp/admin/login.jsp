@@ -43,7 +43,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<h1>可定制虚拟仿真实验教学系统</h1>
+<h1>基于GitHub的实验教学系统</h1>
 <div class="log">
 	<div class="content1">
 	

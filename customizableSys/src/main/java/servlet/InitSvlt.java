@@ -2,6 +2,8 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -306,15 +308,15 @@ public class InitSvlt extends HttpServlet {
 				return;
 			}
 			if("tGitDate".equals(tbname)){		//教师git实验管理--查看数据
-				String tablename="repos"+userid;   
+				String tablename="reposdate";   
 				//定义查询语句变量
 				String sql="";
 				//如果请求来自左侧菜单，查询全部内容
 				if("1".equals(flgs)){
-					session.setAttribute("sql", "select "+tablename+".*,students.sname, terms.termname,course.cname from "+tablename+",students,course,terms where  students.sno=Num and course_id=course.id and repos1.terms_id=terms.id  order by Num ASC");
+					session.setAttribute("sql", "select "+tablename+".*,students.sname, terms.termname,course.cname from "+tablename+",students,course,terms where  students.sno=Num and course_id=course.id and "+tablename+".terms_id=terms.id  order by Num desc");
 				}
 				//查询结果集转化成链表
-				List<GitDate> alist=GetList.getlist(GitDate.class, HandlePage.Sy(db, "100", session,"sql","mysql"));
+				List<GitDate> alist=GetList.getlist(GitDate.class, HandlePage.Sy(db, "20", session,"sql","mysql"));
 				System.out.print("size="+alist.size());
 				//查询结果传到前台
 				request.setAttribute("alist", alist);
@@ -368,7 +370,7 @@ public class InitSvlt extends HttpServlet {
 				request.getRequestDispatcher("/student/StuTask.jsp").forward(request, response);
 				return;
 			}
-			if("mstutask".equals(tbname)){	//学生查询教师发布的实验信息
+			if("mstutask".equals(tbname)){	//学生查询教师发布的实验信息,已提交的信息
 				//定义查询语句变量
 				String sql="";
 				//如果请求来自左侧菜单，查询全部内容
@@ -390,16 +392,18 @@ public class InitSvlt extends HttpServlet {
 				return;
 			}
 			
-			if("Sscore".equals(tbname)){		//教师成绩管理
+			if("Sscore".equals(tbname)){		//学生查看成绩
+				Students userinfo=(Students)session.getAttribute("userinfo");
+				String sno=userinfo.getSno();
 				//定义查询语句变量
+				String tablename="reposdate";
 				String sql="";
 				//如果请求来自左侧菜单，查询全部内容
 				if("1".equals(flgs)){
-					session.setAttribute("sql", "select termname,classno,classname,cno,cname,sno,stutask.*,teatask.title,teatask.remark,teatask.time,teatask.deadline from stutask,terms,classinfo,course,teacher,students, teatask where 1=1  and terms.id=teatask.terms_id and classinfo.id=teatask.classinfo_id and" + 
-												" course.id=teatask.course_id and stu_id=students.id and teacher.id=teatask.teacher_id and teatask_id=teatask.id and stutask.stu_id="+userid+" group by stutask.id order by stutask.id desc");
+					session.setAttribute("sql", "select "+tablename+".*,students.sname, terms.termname,course.cname from "+tablename+",students,course,terms where  students.sno=Num and course_id=course.id and "+tablename+".terms_id=terms.id and Num='"+sno+"'  order by Num DESC");
 				}
 				//查询结果集转化成链表
-				List<Stutask> alist=GetList.getlist(Stutask.class, HandlePage.Sy(db, "10", session,"sql","mysql"));
+				List<GitDate> alist=GetList.getlist(GitDate.class, HandlePage.Sy(db, "10", session,"sql","mysql"));
 				//查询结果传到前台
 				request.setAttribute("alist", alist);
 				List<Terms> termslist=GetList.getlist(Terms.class, db.executeQuery("select * from terms"));
@@ -408,6 +412,26 @@ public class InitSvlt extends HttpServlet {
 				request.setAttribute("courselist", courselist);
 				
 				request.getRequestDispatcher("/student/score.jsp").forward(request, response);
+				return;
+			}
+			if("TaskTip".equals(tbname)){	//学生可完成的实验信息--进度提醒
+				//定义查询语句变量
+				String sql="";
+				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+		        //System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
+
+				String nowtime=df.format(new Date());
+				//如果请求来自左侧菜单，查询全部内容
+				if("1".equals(flgs)){
+					session.setAttribute("sql", "select teatask.*,termname,classname,cname,tName from courseplan,teaTask,classinfo,course,teacher,terms where classinfo.id=teatask.classinfo_id and teatask.terms_id=terms.id and teatask.teacher_id=teacher.id and  course.id=teatask.course_id and deadline > '"+nowtime+"' and classinfo.id in (select classinfo_id from students where id="+userid+") group by id order by id desc");
+				}
+				//查询结果集转化成链表
+				List<TeaTask> alist=GetList.getlist(TeaTask.class, HandlePage.Sy(db, "10", session,"sql","mysql"));
+				System.out.print(alist.size());
+				//查询结果传到前台
+				request.setAttribute("alist", alist);
+				
+				request.getRequestDispatcher("/student/TaskTip.jsp").forward(request, response);
 				return;
 			}
 	}

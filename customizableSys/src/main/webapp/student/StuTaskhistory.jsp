@@ -17,19 +17,12 @@ String path = request.getContextPath();String basePath = request.getScheme()+":/
 		<script type="text/javascript" src="<%=basePath %>js/syssmp.js"></script>
 		<style>
 			.details{
-				display:inline-block;
-				background:#e4e9fc;
-				padding:1px 6px;
-				color:black;
-				font-weight:normal;
-				box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2), 0 1px 1px 0 rgba(0,0,0,0.19);
+				display:inline-block;				
+				padding:1px 20px;				
 			}
 			.details:hover{
-				display:inline-block;
-				background:#f4511e;
-				padding:1px 6px;
-				color:white;
-				font-weight:normal;
+				display:inline-block;				
+				padding:1px 20px;
 				box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2), 0 1px 1px 0 rgba(0,0,0,0.19);
 			}
 		</style>
@@ -112,14 +105,14 @@ String path = request.getContextPath();String basePath = request.getScheme()+":/
 									<td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">学期</span></strong></div></td>									
 									<td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">课程</span></strong></div></td>
 									<td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">实验标题</span></strong></div></td>
-									<td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1"></span></strong></div></td>
+									<td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">详情</span></strong></div></td>
 								</tr>
 								<c:forEach var="a" items="${alist }">
 									<tr>
 										<td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3">${a.termname }</span></div></td>
 										<td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3">${a.cname }</span></div></td>
 										<td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3">${a.title }</span></div></td>
-										<td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3"><a class="details" href="/customizableSys/GetDataSvlt?id=${a.id }&tbname=stuTask">详情</a></span></div></td>
+										<td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3"><a class="details" href="/customizableSys/GetDataSvlt?id=${a.id }&tbname=stuTask"><img src="images/details.png" width="14" height="14" /></a></span></div></td>
 									</tr>
 								</c:forEach>
 							</table></td>

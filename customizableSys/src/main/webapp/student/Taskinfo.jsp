@@ -63,6 +63,22 @@
 
 <script>
 $(document).ready(function(){
+	var date=new Date();
+	  var time=date.toLocaleDateString();
+	  var deadline='${a.deadline}';
+	  deadline=deadline.replace("-","/");
+	  deadline=deadline.replace("-","/");
+	  var date2=new Date(deadline);
+	 // alert(date2);
+	  if(date>date2){		 		  
+		  
+		  $(".showeditor").text("截止提交");
+		  $(".showeditor").attr("disabled","disabled");
+		  $(".showeditor").css("background","#948e8c");
+	  };
+		  	 
+//打开编辑区	
+	
   $(".showeditor").click(function(){
     $(".editor").show();
     $(".btnF").show();

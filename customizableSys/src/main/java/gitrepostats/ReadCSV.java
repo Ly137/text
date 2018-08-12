@@ -20,7 +20,7 @@ public class ReadCSV {
 	 		
 			System.out.println("数据库连接成功");
 			//判断表是否存在，不存在则创建表,每个教师一个表
-			String tablename="repos"+tid;
+			String tablename="reposdate";
 			
 			dao.CreateTable.main(tablename);
 			//录入数据
@@ -36,11 +36,11 @@ public class ReadCSV {
 	 
 				if (temp.length == 14)
 				{	
-					boolean bl=db.checkTrue("select id from "+tablename+" where Num='"+temp[1]+"' and org='" +org+"' and proj='"+proj+"'");
+					boolean bl=db.checkTrue("select id from "+tablename+" where Num='"+temp[1]+"' and org='" +org+"' and proj='"+proj+"' and terms_id="+terms_id+" and course_id="+course_id);
 					if(bl){
 						System.out.print("改记录已存在，执行更新操作");
 						System.out.println();
-						int bls=db.executeUpdate("update "+ tablename+" set Login='"+temp[0]+"',IssueNumber='"+temp[2]+"',IssueCount='"+temp[3]+"',IssueLabels='"+temp[4]+"',Events='"+temp[5]+"',FirstTime='"+temp[6]+"',Pulls="+temp[7]+",Commits="+temp[8]+",Additions="+temp[9]+",Deletions="+temp[10]+",ChangedFiles="+temp[11]+",Comments="+temp[12]+",ReviewComments="+temp[13]+" where Num='"+temp[1]+"'");
+						int bls=db.executeUpdate("update "+ tablename+" set Login='"+temp[0]+"',IssueNumber='"+temp[2]+"',IssueCount='"+temp[3]+"',IssueLabels='"+temp[4]+"',Events='"+temp[5]+"',FirstTime='"+temp[6]+"',Pulls="+temp[7]+",Commits="+temp[8]+",Additions="+temp[9]+",Deletions="+temp[10]+",ChangedFiles="+temp[11]+",Comments="+temp[12]+",ReviewComments="+temp[13]+" where Num='"+temp[1]+"' and org='" +org+"' and proj='"+proj+"' and terms_id="+terms_id+" and course_id="+course_id);
 						if(!(bls>0)){
 							//System.out.print("更新失败");
 							//System.out.println();

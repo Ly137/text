@@ -2,8 +2,8 @@ package bean;
 
 public class GitDate {
 	 private String Login,Num,IssueLabels,FirstTime,org,proj,cname,termname,sname;
-	 private int Id,IssueNumber, IssueCount,Events,Additions,Deletions,ReviewComments,Pulls,Commits,ChangedFiles,Comments,terms_id,course_id;
-	 private float score;
+	 private int Id,score,IssueNumber, IssueCount,Events,Additions,Deletions,ReviewComments,Pulls,Commits,ChangedFiles,Comments,terms_id,course_id;
+	 
 	public String getLogin() {
 		return Login;
 	}
@@ -118,10 +118,11 @@ public class GitDate {
 	public void setCourse_id(int course_id) {
 		this.course_id = course_id;
 	}
-	public float getScore() {
+	
+	public int getScore() {
 		return score;
 	}
-	public void setScore(float score) {
+	public void setScore(int score) {
 		this.score = score;
 	}
 	public String getCname() {

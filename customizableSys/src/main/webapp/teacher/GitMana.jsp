@@ -51,6 +51,7 @@ function submitGitdate(){
 	var filesFull=$("#filesFull").val();
 	var comments=$("#comments").val();
 	var commentsFull=$("#commentsFull").val();
+	alert("termsid="+cktermsid+"***cid="+ccoursesid);
 	if(org =="" || proj=="" || cktermsid=="0" || ccoursesid=="0" || pulls=="" || pullsFull=="" || commits=="" || commitsFull=="" || files=="" || filesFull=="" || comments=="" || commentsFull==""){
 		alert("请将信息填写完整");
 		return ;
@@ -69,7 +70,7 @@ function submitGitdate(){
 		dataType:'json',
 		success:function(data){			
 				alert(data.msg);
-				window.location.href="/customizableSys/GetDataSvlt?tbname=newgit&org="+org+"&proj="+proj;
+				window.location.href="/customizableSys/GetDataSvlt?tbname=tGitDate&org="+org+"&proj="+proj;
 		}
 	});
 }
@@ -78,7 +79,7 @@ $(function() {
   });
 $(function() {
     $( ".tabs-2" ).click(function(){
-    	window.location.href="/customizableSys/GetDataSvlt?tbname=newgit&org=hzuapps&proj=web-wechat-2017&id=1";
+    	window.location.href="/customizableSys/InitSvlt?flgs=1&tbname=tGitDate";
     });
   });  
 </script>

@@ -1,91 +1,87 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 String path = request.getContextPath();String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-	<head>
-		<base href="<%=basePath%>">
-		<title>学生查看成绩</title>
-		<link rel="stylesheet" type="text/css" href="<%=basePath%>css/demo.css">
-		<link rel="stylesheet" type="text/css" href="<%=basePath%>css/easyui.css">
-		<link rel="stylesheet" type="text/css" href="<%=basePath%>css/icon.css">
-		<link rel="stylesheet" type="text/css" href="<%=basePath%>css/syscss.css">
-		<script type="text/javascript" src="<%=basePath%>js/jquery-3.3.1.min.js"></script>
-		<script type="text/javascript" src="<%=basePath%>js/jquery.easyui.min.js"></script>
-		<script type="text/javascript" src="<%=basePath %>js/syssmp.js"></script>
-		<style>
-			.details{
-				display:inline-block;
-				background:#e4e9fc;
-				padding:1px 6px;
-				color:black;
-				font-weight:normal;
-				box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2), 0 1px 1px 0 rgba(0,0,0,0.19);
+<head>
+<base href="<%=basePath%>">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GitHub实验管理</title>
+
+
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/demo.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/easyui.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/icon.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/syscss.css">
+<script type="text/javascript" src="<%=basePath%>js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="<%=basePath %>js/syssmp.js"></script>
+
+<script language="JavaScript" >
+
+//查询
+function cktj(){
+	var userid=${userid};
+	var tbname="reposdate";
+	var sqls="select "+tbname+".*,students.sname, terms.termname,course.cname from "+tbname+",students,course,terms where  students.sno=Num and course_id=course.id and terms_id=terms.id  ";
+	var termsid=$("#cktermsid").combobox('getValue');
+	if(termsid!="0"){
+		sqls+=" and terms_id="+termsid;
+	}
+	var courseid=$("#ccoursesid").combobox('getValue');
+	if(courseid!="0"){
+		sqls+=" and course_id="+courseid;
+	}
+	
+	sqls+=" and Num='"+${userinfo.sno}+"' order by "+tbname+".id desc";
+	
+	$.ajax({
+		url:'CkSvlt',
+		type:'post',
+		data:{"sql":sqls},
+		dataType:'json',
+		success:function(data){
+			if(data.msg==1){
+				window.location.href="InitSvlt?tbname=Sscore";
+			}else{
+				alert(data.msg);
 			}
-			.details:hover{
-				display:inline-block;
-				background:#f4511e;
-				padding:1px 6px;
-				color:white;
-				font-weight:normal;
-				box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2), 0 1px 1px 0 rgba(0,0,0,0.19);
-			}
-		</style>
-		<script type="text/javascript">
-		//查询
-		function cktj(){
-			var sqls="select termname,classno,classname,cno,cname,sno,stutask.*,teatask.title,teatask.remark,teatask.time,teatask.deadline from stutask,terms,classinfo,course,teacher,students, teatask where 1=1  and terms.id=teatask.terms_id and classinfo.id=teatask.classinfo_id   ";
-			var termsid=$("#ckterm").combobox('getValue');
-			var courseid=$("#ckcourse").combobox('getValue');
-			if(termsid!="0"){
-				sqls+=" and terms.id="+termsid;
-			}
-			if(courseid!="0"){
-				sqls+=" and course.id="+courseid;
-			}
-			sqls+=" and  course.id=teatask.course_id and stu_id=students.id and teacher.id=teatask.teacher_id and teatask_id=teatask.id and stutask.stu_id="+${userid}+" group by stutask.id order by stutask.id desc";
-			$.ajax({
-				url:'/customizableSys/CkSvlt',
-				type:'post',
-				data:{"sql":sqls},
-				dataType:'json',
-				success:function(data){
-					if(data.msg==1){
-						window.location.href="InitSvlt?tbname=Sscore";
-					}else{
-						alert(data.msg);
-					}
-				}
-			});
 		}
-	</script>
+	});
+}
+</script>
+
 </head>
-<body>	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<body>	
+	  
+	  	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td height="30"><table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr>
-					<td class="STYLE7" style="padding-left: 50px;">成绩管理</td>
+					<td class="STYLE7" style="padding-left: 50px;">GitHub实验信息</td>
 					<td style="padding-right:10px;"><div align="right" style="padding-right: 50px;">
 						<table border="0" align="right" cellpadding="0" cellspacing="0">
 							<tr>
 								<td class="STYLE3">
-									学期：<select id="ckterm"  class="ckinput easyui-combobox" >
+									学期：<select id="cktermsid" class="ckinput easyui-combobox">
 											<option value="0">选择学期</option>
 											<c:forEach var="a" items="${termslist }">
 												<option value="${a.id }">${a.termname }</option>
 											</c:forEach>
 										</select>
-								</td>								
+								</td>
 								<td class="STYLE3">
-									课程：<select id="ckcourse"  class="ckinput easyui-combobox" >
+									课程：<select id="ccoursesid" name="ccoursesid" class="ckinput easyui-combobox">
 											<option value="0">选择课程</option>
-											<c:forEach var="s" items="${courselist }">
-												<option value="${s.id }">${s.cname }</option>
+											<c:forEach var="a" items="${courselist }">
+										    <option value="${a.id }">${a.cname }</option>
 											</c:forEach>
 										</select>
-								</td>								
+								</td>
+								
 								<td width="60">
 									<table border="0" cellpadding="0" cellspacing="0">
 										<tr>
@@ -109,17 +105,23 @@ String path = request.getContextPath();String basePath = request.getScheme()+":/
 						<tr>
 							<td><table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#c9c9c9">
 								<tr>
-									<td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">学期</span></strong></div></td>									
+									<td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">序号</span></strong></div></td>
+									<td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">学期</span></strong></div></td>
 									<td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">课程</span></strong></div></td>
-									<td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">实验标题</span></strong></div></td>
+									<td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">学号</span></strong></div></td>
+									<td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">姓名</span></strong></div></td>
 									<td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">成绩</span></strong></div></td>
+									
 								</tr>
-								<c:forEach var="a" items="${alist }">
+								<c:forEach var="git" items="${alist }" varStatus="index">
 									<tr>
-										<td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3">${a.termname }</span></div></td>
-										<td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3">${a.cname }</span></div></td>
-										<td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3">${a.title }</span></div></td>
-										<td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3">${a.score }</span></div></td>
+										<td align="center" height="22" bgcolor="#FFFFFF">${index.count }</td>
+										<td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3">${git.termname }</span></div></td>
+										<td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3">${git.cname }</span></div></td>
+										<td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3">${git.num }</span></div></td>
+										<td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3">${git.sname }</span></div></td>										
+										<td height="22" bgcolor="#FFFFFF" ><div align="center"><span class="STYLE3">${git.score }</span></div></td>
+										
 									</tr>
 								</c:forEach>
 							</table></td>
@@ -164,5 +166,7 @@ String path = request.getContextPath();String basePath = request.getScheme()+":/
 				<input id="pt" name="tbname"/>
 			</form>
 		</div>
-	</body>
+	
+	  				
+</body>
 </html>

@@ -17,6 +17,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <script src="../js/jquery.min.js.下载"></script>
+<link href="../jqueryUIcustom/css/base/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+<script src="../jqueryUIcustom/js/jquery-1.8.3.js"></script>
+<script src="../jqueryUIcustom/js/jquery-ui-1.9.2.custom.js"></script>
  <style> 
   .banner{
   margin-bottom:10px;
@@ -83,7 +86,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	.menu a img{
 		margin-right:10px;
 	}	
-	
+	/*实验任务进度对话框*/
+	.dialog p{
+		text-align:center;
+	}
+	.dialog p span{
+		color:darkred;
+	}
+	.dialog p a{
+		 background-color: #6274f8;
+	    border: none;
+	    color: white;
+	    padding: 5px 15px;
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    font-size: 16px;
+	    margin: 4px 2px;
+	    cursor: pointer;
+	    border-radius: 8px;
+	    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 6px 0 rgba(0,0,0,0.19)
+	}
 	/*页脚*/
     .footer {
       padding-top: 20px;
@@ -97,6 +120,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     }
 
 </style>
+
+<script>
+window.onload=function(){	
+	var TaskTipSize=${TaskTipSize};
+	if(TaskTipSize != "0"){
+		 $( ".dialog" ).dialog();
+	}
+
+ };
+ function closeDlg(){
+	 $( ".dialog" ).dialog("close");
+ }
+</script>
 </head>
 <body>
 <!-- 顶部标题栏 -->
@@ -108,6 +144,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            
 </div> 
 <!-- 中间内容部分 -->
+  	
  <div class="row"  style="margin-left:0px;margin-right:0px;">
  	<!-- 左侧菜单栏 --> 
     <div class="col-sm-2 col-xs-12" style="min-height:550px;border-right:2px #eee solid; font-size:14px;">
@@ -146,7 +183,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </iframe>
     </div>
 </div>
-    
+<!-- 任务提醒对话框 -->
+    <div class="dialog" title="实验任务进度提示" >
+	  <p>您共有<span> ${TaskTipSize } </span>个实验任务可完成</p>	  
+	  <p><a href="/customizableSys/InitSvlt?flgs=1&tbname=TaskTip" target='SubMenu' onclick="closeDlg()">立即查看</a></p>
+	</div>
 <!-- 底部信息 -->
 <div class="footer">
     <span class="school">建设单位：${other.footer_name}</span>

@@ -127,10 +127,10 @@ String path = request.getContextPath();String basePath = request.getScheme()+":/
 												<td class="STYLE4">&nbsp;&nbsp;共有 ${allnums } 条记录，当前第 ${pagenum }/${pagenums } 页</td>
 												<td><table border="0" align="right" cellpadding="0" cellspacing="0">
 													<tr>
-														<td width="40"><a href="javascript:void(0);" onclick="sybtdown('PagingSvlt?flag=1','stutaskinfo');return false;"><img src="images/first.gif" width="37" height="15"/></a></td>
-														<td width="45"><a href="javascript:void(0);" onclick="syybtdown('PagingSvlt?flag=2','stutaskinfo');return false;"><img src="images/back.gif" width="37" height="15"/></a></td>
-														<td width="45"><a href="javascript:void(0);" onclick="xyybtdown('PagingSvlt?flag=3','stutaskinfo');return false;"><img src="images/next.gif" width="37" height="15"/></a></td>
-														<td width="40"><a href="javascript:void(0);" onclick="wybtdown('PagingSvlt?flag=4','stutaskinfo');return false;"><img src="images/last.gif" width="37" height="15"/></a></td>
+														<td width="40"><a href="javascript:void(0);" onclick="sybtdown('PagingSvlt?flag=1','tshiyan');return false;"><img src="images/first.gif" width="37" height="15"/></a></td>
+														<td width="45"><a href="javascript:void(0);" onclick="syybtdown('PagingSvlt?flag=2','tshiyan');return false;"><img src="images/back.gif" width="37" height="15"/></a></td>
+														<td width="45"><a href="javascript:void(0);" onclick="xyybtdown('PagingSvlt?flag=3','tshiyan');return false;"><img src="images/next.gif" width="37" height="15"/></a></td>
+														<td width="40"><a href="javascript:void(0);" onclick="wybtdown('PagingSvlt?flag=4','tshiyan');return false;"><img src="images/last.gif" width="37" height="15"/></a></td>
 														<td width="100"><div align="center"><span class="STYLE1"> </span></div></td>
 														<td width="40"></td>
 													</tr>

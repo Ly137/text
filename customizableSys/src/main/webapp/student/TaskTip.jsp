@@ -7,7 +7,7 @@ String path = request.getContextPath();String basePath = request.getScheme()+":/
 <html>
 	<head>
 		<base href="<%=basePath%>">
-		<title>学生实验任务</title>
+		<title>学生实验任务--可完成</title>
 		<link rel="stylesheet" type="text/css" href="<%=basePath%>css/demo.css">
 		<link rel="stylesheet" type="text/css" href="<%=basePath%>css/easyui.css">
 		<link rel="stylesheet" type="text/css" href="<%=basePath%>css/icon.css">
@@ -48,32 +48,7 @@ String path = request.getContextPath();String basePath = request.getScheme()+":/
 			  
 		});
 		
-		//查询
-		function cktj(){
-			var sqls="select teatask.*,termname,classname,cname,tName from courseplan,teaTask,classinfo,course,teacher,terms where classinfo.id=teatask.classinfo_id and teatask.terms_id=terms.id and teatask.teacher_id=teacher.id and  course.id=teatask.course_id ";
-			var termsid=$("#ckterm").combobox('getValue');
-			var courseid=$("#ckcourse").combobox('getValue');
-			if(termsid!="0"){
-				sqls+=" and terms.id="+termsid;
-			}
-			if(courseid!="0"){
-				sqls+=" and course.id="+courseid;
-			}
-			sqls+=" and classinfo.id in (select classinfo_id from students where id="+${userid}+") group by id";
-			$.ajax({
-				url:'/customizableSys/CkSvlt',
-				type:'post',
-				data:{"sql":sqls},
-				dataType:'json',
-				success:function(data){
-					if(data.msg==1){
-						window.location.href="InitSvlt?tbname=stutaskinfo";
-					}else{
-						alert(data.msg);
-					}
-				}
-			});
-		}
+		
 	</script>
 </head>
 <body>	<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -83,34 +58,7 @@ String path = request.getContextPath();String basePath = request.getScheme()+":/
 					<td class="STYLE7" style="padding-left: 50px;">实验信息</td>
 					<td style="padding-right:10px;"><div align="right" style="padding-right: 50px;">
 						<table border="0" align="right" cellpadding="0" cellspacing="0">
-							<tr>
-								<td class="STYLE3">
-									学期：<select id="ckterm"  class="ckinput easyui-combobox" >
-											<option value="0">选择学期</option>
-											<c:forEach var="a" items="${termslist }">
-												<option value="${a.id }">${a.termname }</option>
-											</c:forEach>
-										</select>
-								</td>
-								<td class="STYLE3">
-									课程：<select id="ckcourse"  class="ckinput easyui-combobox" >
-											<option value="0">选择课程</option>
-											<c:forEach var="s" items="${courselist }">
-												<option value="${s.id }">${s.cname }</option>
-											</c:forEach>
-										</select>
-								</td>								
-								<td width="60">
-									<table border="0" cellpadding="0" cellspacing="0">
-										<tr>
-											<td class="STYLE1"><div align="center"><a href="javascript:void(0);" onclick="cktj();return false;"><img src="images/search.png" width="14" height="14" /></a></div></td>
-											<td class="STYLE1"><div align="center"><a href="javascript:void(0);" onclick="cktj();return false;">查询</a></div></td>
-										</tr>
-									</table>
-								</td>
-								<td width="60"></td>
-								<td width="52"></td>
-							</tr>
+							
 						</table>
 					</div></td>
 				</tr>
@@ -152,10 +100,10 @@ String path = request.getContextPath();String basePath = request.getScheme()+":/
 												<td class="STYLE4">&nbsp;&nbsp;共有 ${allnums } 条记录，当前第 ${pagenum }/${pagenums } 页</td>
 												<td><table border="0" align="right" cellpadding="0" cellspacing="0">
 													<tr>
-														<td width="40"><a href="javascript:void(0);" onclick="sybtdown('PagingSvlt?flag=1','stutaskinfo');return false;"><img src="images/first.gif" width="37" height="15"/></a></td>
-														<td width="45"><a href="javascript:void(0);" onclick="syybtdown('PagingSvlt?flag=2','stutaskinfo');return false;"><img src="images/back.gif" width="37" height="15"/></a></td>
-														<td width="45"><a href="javascript:void(0);" onclick="xyybtdown('PagingSvlt?flag=3','stutaskinfo');return false;"><img src="images/next.gif" width="37" height="15"/></a></td>
-														<td width="40"><a href="javascript:void(0);" onclick="wybtdown('PagingSvlt?flag=4','stutaskinfo');return false;"><img src="images/last.gif" width="37" height="15"/></a></td>
+														<td width="40"><a href="javascript:void(0);" onclick="sybtdown('PagingSvlt?flag=1','TaskTip');return false;"><img src="images/first.gif" width="37" height="15"/></a></td>
+														<td width="45"><a href="javascript:void(0);" onclick="syybtdown('PagingSvlt?flag=2','TaskTip');return false;"><img src="images/back.gif" width="37" height="15"/></a></td>
+														<td width="45"><a href="javascript:void(0);" onclick="xyybtdown('PagingSvlt?flag=3','TaskTip');return false;"><img src="images/next.gif" width="37" height="15"/></a></td>
+														<td width="40"><a href="javascript:void(0);" onclick="wybtdown('PagingSvlt?flag=4','TaskTip');return false;"><img src="images/last.gif" width="37" height="15"/></a></td>
 														<td width="100"><div align="center"><span class="STYLE1"> </span></div></td>
 														<td width="40"></td>
 													</tr>

@@ -64,7 +64,7 @@ public class ReadCSV extends HttpServlet {
  
 			if (temp.length == 14)
 			{	
-				boolean bl=db.checkTrue("select id from "+tablename+" where Num='"+temp[1]+"'");
+				boolean bl=db.checkTrue("select id from "+tablename+" where Num='"+temp[1]+"' ");
 				if(bl){
 					System.out.print("改记录已存在，执行更新操作");
 					System.out.println();

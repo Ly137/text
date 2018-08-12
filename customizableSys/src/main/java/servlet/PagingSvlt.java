@@ -20,6 +20,7 @@ import bean.Snav;
 import bean.navList;
 import bean.Course;
 import bean.CoursePlan;
+import bean.GitDate;
 import bean.Students;
 import bean.Stutask;
 import bean.TeaTask;
@@ -201,7 +202,42 @@ public class PagingSvlt extends HttpServlet {
 				}
 				return;
 			}
-			
+			if("tshiyan".equals(tbname)){	//教师的任课课程
+				if(syflag){
+					request.getRequestDispatcher("/InitSvlt?tbname="+tbname).forward(request, response);
+				}else{
+					List<TeaTask> alist=GetList.getlist(TeaTask.class, rs);
+					
+					//查询结果传到前台
+					request.setAttribute("alist", alist);
+					List<Terms> termslist=GetList.getlist(Terms.class, db.executeQuery("select * from terms"));
+					request.setAttribute("termslist", termslist);
+					List<Classinfo> classinfolist=GetList.getlist(Classinfo.class, db.executeQuery("select * from classinfo"));
+					request.setAttribute("classinfolist", classinfolist);
+					List<Course> courselist=GetList.getlist(Course.class, db.executeQuery("select * from course"));
+					request.setAttribute("courselist", courselist);
+					
+					
+					request.getRequestDispatcher("/teacher/Tshiyan.jsp").forward(request, response);
+					return;
+				}
+				return;
+			}
+			if("tGitDate".equals(tbname)){	//教师分页查看GitHub实验数据
+				if(syflag){
+					request.getRequestDispatcher("/InitSvlt?tbname="+tbname).forward(request, response);
+				}else{
+					List<GitDate> alist=GetList.getlist(GitDate.class, rs);
+					request.setAttribute("alist", alist);
+					List<Terms> termslist=GetList.getlist(Terms.class, db.executeQuery("select * from terms"));
+					request.setAttribute("termslist", termslist);				
+					List<Course> courselist=GetList.getlist(Course.class, db.executeQuery("select * from course"));
+					request.setAttribute("courselist", courselist);
+					
+					request.getRequestDispatcher("/teacher/GitDate.jsp").forward(request, response);
+				}
+				return;
+			}
 			
 	/**
 	 * 学生页面操作处理		
@@ -276,7 +312,7 @@ public class PagingSvlt extends HttpServlet {
 				if(syflag){
 					request.getRequestDispatcher("/InitSvlt?tbname="+tbname).forward(request, response);
 				}else{
-					List<Stutask> alist=GetList.getlist(Stutask.class, rs);
+					List<GitDate> alist=GetList.getlist(GitDate.class, rs);
 					request.setAttribute("alist", alist);
 					//学期
 					List<Terms> termslist=GetList.getlist(Terms.class, db.executeQuery("select * from terms"));
@@ -284,6 +320,18 @@ public class PagingSvlt extends HttpServlet {
 					List<Course> courselist=GetList.getlist(Course.class, db.executeQuery("select * from course"));
 					request.setAttribute("courselist", courselist);
 					request.getRequestDispatcher("/student/score.jsp").forward(request, response);
+				}
+				return;
+			}
+			if("TaskTip".equals(tbname)){
+				if(syflag){
+					request.getRequestDispatcher("/InitSvlt?tbname="+tbname).forward(request, response);
+				}else{
+					List<TeaTask> alist=GetList.getlist(TeaTask.class, HandlePage.Sy(db, "10", session,"sql","mysql"));
+					System.out.print(alist.size());
+					//查询结果传到前台
+					request.setAttribute("alist", alist);
+					request.getRequestDispatcher("/student/TaskTip.jsp").forward(request, response);
 				}
 				return;
 			}

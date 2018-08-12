@@ -2,6 +2,8 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -207,7 +209,7 @@ public class GetDataSvlt extends HttpServlet {
 			//获取当前登录用户信息
 			Object userid=session.getAttribute("userid");
 			int taskid=Integer.parseInt(request.getParameter("id"));
-			session.setAttribute("sql", "select teatask.*,termname,classname,cname,tName from courseplan,teaTask,classinfo,course,teacher,terms where classinfo.id=teatask.classinfo_id and teatask.terms_id=terms.id and teatask.teacher_id=teacher.id and  course.id=teatask.course_id and teatask.id="+taskid+" and classinfo.id in (select classinfo_id from students where id="+userid+") group by id");
+			session.setAttribute("sql", "select teatask.*,termname,classname,cname,tName from courseplan,teaTask,classinfo,course,teacher,terms where classinfo.id=teatask.classinfo_id and teatask.terms_id=terms.id and teatask.teacher_id=teacher.id and  course.id=teatask.course_id and teatask.id="+taskid+" group by id");
 			
 			//查询结果集转化成链表
 			List<TeaTask> alist=GetList.getlist(TeaTask.class, HandlePage.Sy(db, "10", session,"sql","mysql"));
@@ -245,15 +247,15 @@ public class GetDataSvlt extends HttpServlet {
 			request.getRequestDispatcher("/teacher/TaskHistoryinfo.jsp").forward(request, response);
 			return;
 		}
-		if("newgit".equals(tbname)){	//获取新导入的GitHub实验信息
+		if("tGitDate".equals(tbname)){	//获取新导入的GitHub实验信息
 			
 			//获取当前登录用户信息
-			//Object userid=session.getAttribute("userid");
+			Object userid=session.getAttribute("userid");
 			String org=request.getParameter("org");
 			String proj=request.getParameter("proj");
-			String userid=request.getParameter("id");
-			String tablename="repos"+userid;   
-			session.setAttribute("sql", "select "+tablename+".*,students.sname, terms.termname,course.cname from "+tablename+",students,course,terms where  students.sno=Num and course_id=course.id and repos1.terms_id=terms.id and org='"+org+"' and proj='"+proj+"'");
+			
+			String tablename="reposdate";   
+			session.setAttribute("sql", "select "+tablename+".*,students.sname, terms.termname,course.cname from "+tablename+",students,course,terms where  students.sno=Num and course_id=course.id and "+tablename+".terms_id=terms.id and org='"+org+"' and proj='"+proj+"'");
 			
 			//查询结果集转化成链表
 			List<GitDate> alist=GetList.getlist(GitDate.class, HandlePage.Sy(db, "100", session,"sql","mysql"));
@@ -317,6 +319,8 @@ public class GetDataSvlt extends HttpServlet {
 				request.getRequestDispatcher("/student/TaskHistoryinfo.jsp").forward(request, response);
 				return;
 			}
+			
+			
 		PrintWriter out=response.getWriter();
 		out.print(json.toString());
 		out.flush();

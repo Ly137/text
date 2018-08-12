@@ -2,6 +2,8 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -16,6 +18,7 @@ import com.wm.utils.GetList;
 
 import net.sf.json.JSONObject;
 import bean.Students;
+import bean.TeaTask;
 import bean.Teacher;
 import bean.indexContent;
 import bean.user;
@@ -104,6 +107,15 @@ public class LoginSvlt extends HttpServlet {
 								ad=alist.get(0);
 							}
 							session.setAttribute("userinfo", ad);
+							//任务进度提醒
+							SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+					        //System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
+
+							String nowtime=df.format(new Date());
+							
+							List<TeaTask> TaskTip=GetList.getlist(TeaTask.class, db.executeQuery("select teatask.*,termname,classname,cname,tName from courseplan,teaTask,classinfo,course,teacher,terms where classinfo.id=teatask.classinfo_id and teatask.terms_id=terms.id and teatask.teacher_id=teacher.id and  course.id=teatask.course_id and deadline > '"+nowtime+"' and classinfo.id in (select classinfo_id from students where id="+id+") group by id order by id desc"));
+							System.out.println("截止日期提示="+TaskTip.size());
+							session.setAttribute("TaskTipSize", TaskTip.size());
 						}
 						if("tea".equals(utype)){
 							Teacher ad=new Teacher();

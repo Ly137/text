@@ -104,8 +104,8 @@ public class testgitSlvt extends HttpServlet {
 	    sp.setCommentsFull(Integer.parseInt(commentsFull));
 	    
 	    //读取查询库的实验数据，实例化
-	    String tablename="repos"+userinfo.getId();
-	    String sql="select id,Pulls,Commits,ChangedFiles,Comments from "+tablename+" where org='"+org+"' and proj='"+proj+"'";
+	    String tablename="reposdate";
+	    String sql="select id,Pulls,Commits,ChangedFiles,Comments from "+tablename+" where org='"+org+"' and proj='"+proj+"' and terms_id="+terms_id+" and course_id="+course_id;
 	    List<GitDate> gitdatelist=GetList.getlist(GitDate.class, db.executeQuery(sql));
 
 	    int flag=0;  //所以成绩都更新完毕
@@ -128,7 +128,7 @@ public class testgitSlvt extends HttpServlet {
 	    	double file2=sp.getFile();
 	    	double comment2=sp.getComments();
 	    	
-	    	DecimalFormat df=new DecimalFormat("0.");
+	    	DecimalFormat df=new DecimalFormat("0.0");
 	    	if(p>=pf) {
 	    		sum=pull2;	    		
 	    	}else {	    		
@@ -150,9 +150,10 @@ public class testgitSlvt extends HttpServlet {
 	    		sum=sum+comment2*co/cof;	    		
 	    	}
 	    	sum=sum*100;
-	    	String temp=df.format(sum);
-	    	float score=Float.parseFloat(temp);	    	 	    	
-	    	int bls=db.executeUpdate("update  "+tablename+" set score="+score+" where id="+gitdatelist.get(i).getId());
+	    	
+	    	System.out.print((int)sum);
+	    	System.out.println();
+	    	int bls=db.executeUpdate("update  "+tablename+" set score="+(int)sum+" where id="+gitdatelist.get(i).getId());
 	    	if(bls<=0){
 				flag=1;
 			}		    	

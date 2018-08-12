@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+<!-- Tab标签 -->
 <link href="../jqueryUIcustom/css/base/jquery-ui-1.9.2.custom.css" rel="stylesheet">
 <script src="../jqueryUIcustom/js/jquery-1.8.3.js"></script>
 <script src="../jqueryUIcustom/js/jquery-ui-1.9.2.custom.js"></script>

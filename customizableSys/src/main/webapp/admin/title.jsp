@@ -10,98 +10,132 @@ String path = request.getContextPath();String basePath = request.getScheme()+":/
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="<%=basePath%>lib/jquery/jquery-3.3.1.min.js"></script>
 <script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script>
+<!-- Tab标签 -->
+<link href="<%=basePath%>/jqueryUIcustom/css/base/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+<script src="<%=basePath%>/jqueryUIcustom/js/jquery-1.8.3.js"></script>
+<script src="<%=basePath%>/jqueryUIcustom/js/jquery-ui-1.9.2.custom.js"></script>
+<title>设置站名及logo</title>
 <style>
 	.box1{
 		width:80%;
 		padding:3% 10%;
-		background-color:#edf0fd;		 
-		box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2), 0 1px 1px 0 rgba(0,0,0,0.19);
+		border-top:10px solid #eee;	 
+	
 		
 	}	
+	.btn{
+		 background-color: #6274f8;
+	    border: none;
+	    color: white;
+	    padding: 5px 10px;
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    font-size: 16px;
+	    margin: 4px 2px;
+	    cursor: pointer;
+	    border-radius: 8px;
+	   
+	}
 </style>
-<title>设置站名及logo</title>
+
+<script>
+$(function() {
+    $( "#tabs" ).tabs();
+  });
+$(function() {
+    $( ".showResult" ).click(function(){    	
+    	window.open("http://localhost:8080/customizableSys/index.jsp");
+    });
+  });
+</script>
 </head>
 <body>
-
-
-<div class="box1">
-	<!-- 上传logo -->
-	<form class="fileForm"  enctype="multipart/form-data" >
-		<table width="100%">
-
-			<tr>	
-				<td  width="10%">logo:</td>
-				<td width="40%"><span style="color:#464748;font-size:12px;">(<span style="color:red;">tips</span>：图片为png格式，大小XXX)</span>					
-					    <input type="file" name="uploadFile" />	
-					    <input type="button" value="更改"  class="upload"/>			    					    				    
-				</td>							
-			</tr>
-		</table>
-	</form>	
-	<!-- 上传背景图片 -->
-	<form class="fileFormbg"  enctype="multipart/form-data" >
-		<table width="100%">
-			<tr>	
-				<td  width="10%">背景图片:</td>
-				<td width="40%"><span style="color:#464748;font-size:12px;">(<span style="color:red;">tips</span>：图片为jpg格式，大小XXX)</span>									
-					    <input type="file" name="uploadFile" />
-					    <input type="button" value="更改"  class="uploadbg"/>						    
-				</td>			
-			</tr>
-		</table>
-	</form>	
-</div>
-<div class="box1">
-	<!-- 上传站名、建设单位、地址、背景颜色，文字颜色等信息 -->
-	<form >
-		<table >
-			<tr>
-				<td width="20%">站名:</td>
-				<td width="70%">				
-						<input type="text" name="websiteTitle" id="websiteTitle" size="50" value="${other.title }">									
-				</td>
-			</tr>
+	<div id="tabs">
+	  <ul>
+	    <li><a href="#tabs-1">网站页面风格管理</a></li>	
+	    <li><a href="#tabs-2" class="showResult">查看效果</a></li>			    
+	  </ul>
+	  <div id="tabs-1">
+	  	<div class="box1">
+			<!-- 上传logo -->
+			<form class="fileForm"  enctype="multipart/form-data" >
+				<table width="100%">
 		
-			<tr>
-				<td width="20%">建设单位:</td>
-				<td width="70%">				
-						<input type="text" name="organization" id="organization" size="50" value="${other.footer_name }">									
-				</td>
-			</tr>
-			<tr>
-				<td width="20%">单位地址:</td>
-				<td width="70%">				
-						<input type="text" name="address" id="address" size="50" value="${other.footer_Addr }">									
-				</td>
-			</tr>
-		</table>
-		<table  ng-app="myApp" ng-controller="myCtrl" >
-			<tr>
-				<td width="20%">背景颜色:</td>
-				<td width="50%">
-							
-						<input type="text" name="bgColorCode" id="bgColorCode"  value={{Tcolor}}>								
-						<input  type="color"   ng-model="Tcolor">									
-				</td>
-			</tr>		
-			<tr >
-				<td width="20%">文字颜色:</td>
-				<td width="50%">			
-						<input type="text" name="wordColorCode" id="wordColorCode"  value={{Fcolor}}>	
-						<input  type="color"  ng-model="Fcolor">									
-				</td>
-				<td width="30%" rowspan="4"><button onclick="submit2()">更改</button>
-				</td>
-			</tr>
+					<tr>	
+						<td  width="5%">logo:</td>
+						<td width="40%"><span style="color:#464748;font-size:12px;">(<span style="color:red;">tips</span>：png格式)</span>					
+							    <input type="file" name="uploadFile" />	
+							    <input type="button" value="更改"  class="upload btn"/>			    					    				    
+						</td>							
+					</tr>
+				</table>
+			</form>	
+			<!-- 上传背景图片 -->
+			<form class="fileFormbg"  enctype="multipart/form-data" >
+				<table width="100%">
+					<tr>	
+						<td  width="5%">背景图片:</td>
+						<td width="40%"><span style="color:#464748;font-size:12px;">(<span style="color:red;">tips</span>：jpg格式)</span>									
+							    <input type="file" name="uploadFile" />
+							    <input type="button" value="更改"  class="uploadbg btn" />						    
+						</td>			
+					</tr>
+				</table>
+			</form>	
+		</div>
+		<div class="box1">
+			<!-- 上传站名、建设单位、地址、背景颜色，文字颜色等信息 -->
+			<form >
+				<table width="100%" >
+					<tr>
+						<td width="20%">站名:</td>
+						<td width="70%" >				
+								<input type="text" name="websiteTitle" id="websiteTitle" size="50" value="${other.title }">									
+						</td>
+					</tr>
+				
+					<tr>
+						<td width="20%">建设单位:</td>
+						<td width="70%" >				
+								<input type="text" name="organization" id="organization" size="50" value="${other.footer_name }">									
+						</td>
+					</tr>
+					<tr>
+						<td width="20%">单位地址:</td>
+						<td width="70%">				
+								<input type="text" name="address" id="address" size="50" value="${other.footer_Addr }">									
+						</td>
+					</tr>
+				</table>
+				<table  width="100%" ng-app="myApp" ng-controller="myCtrl" >
+					<tr>
+						<td width="20%">背景颜色:</td>
+						<td width="70%">
+									
+								<input type="text" name="bgColorCode" id="bgColorCode"  value={{Tcolor}}>								
+								<input  type="color"   ng-model="Tcolor">									
+						</td>
+					</tr>		
+					<tr >
+						<td width="20%">文字颜色:</td>
+						<td width="70%">			
+								<input type="text" name="wordColorCode" id="wordColorCode"  value={{Fcolor}}>	
+								<input  type="color"  ng-model="Fcolor">									
+						</td>
+						
+					</tr>
+					
+				</table>
+				<p style="text-align:center;"><button onclick="submit2()"  class="btn">提交更改</button>				    					    				    
+				</p>
+			</form>
 			
-		</table>
-		<p style="text-align:center;"><a href="<%=basePath%>index.jsp"   target='_target'
-		style="text-decoration:none;display:inline-block;padding:10px 20px;
-		background:#ced8fe;color:#004000;box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2), 0 1px 1px 0 rgba(0,0,0,0.19);">查看效果</a>				    					    				    
-		</p>
-	</form>
-	
-</div>
+		</div>
+	  </div>
+	</div>
+
+
 
 <script>
 //上传logo

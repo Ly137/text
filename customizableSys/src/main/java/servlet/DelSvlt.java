@@ -100,6 +100,20 @@ public class DelSvlt extends HttpServlet {
 					json.put("msg", "删除失败");
 				}
 			}
+			if("terms".equals(tbname)){	//二级导航栏
+				if(ids.length()>0){
+					//删除所要删除是信息语句
+					String sql="delete from terms where id in("+ids+")";
+					//删除操作
+					i=db.executeUpdate(sql);
+				}
+				//如果i>0 说明删除掉了想要删除的数据
+				if(i>0){
+					json.put("msg", "删除成功");
+				}else{
+					json.put("msg", "删除失败");
+				}
+			}
 			if("teacher".equals(tbname)){	//教师信息
 				if(ids.length()>0){
 					//删除所要删除是信息语句
@@ -170,7 +184,24 @@ public class DelSvlt extends HttpServlet {
 					json.put("msg", "删除失败");
 				}
 			}
-			
+			int i2=0;
+			if("tshiyan".equals(tbname)){	//课程实验安排
+				if(ids.length()>0){
+					//删除所要删除是信息语句
+					String sql="delete from stutask where teatask_id in("+ids+")";
+					String sql2="delete from teatask where id in("+ids+")";
+					//删除操作
+					i=db.executeUpdate(sql);
+					
+					i2=db.executeUpdate(sql2);
+				}
+				//如果i>0 说明删除掉了想要删除的数据
+				if(i>0 && i2>0){
+					json.put("msg", "删除成功");
+				}else{
+					json.put("msg", "删除失败");
+				}
+			}
 			
 			PrintWriter out=response.getWriter();
 			out.print(json.toString());

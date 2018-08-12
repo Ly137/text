@@ -46,10 +46,39 @@ String path = request.getContextPath();String basePath = request.getScheme()+":/
 				dataType:'json',
 				success:function(data){
 					if(data.msg==1){
-						window.location.href="InitSvlt?tbname=stutaskinfo";
+						window.location.href="InitSvlt?tbname=tshiyan";
 					}else{
 						alert(data.msg);
 					}
+				}
+			});
+		}
+		//删除
+		function delsbt(){
+			var ids="";
+			$("input:checkbox").each(
+				function(){
+					if($(this).prop("checked")){
+						var nm=$(this).prop("name");
+						if(nm.indexOf("delid")==0){
+							ids+=$(this).val()+",";
+						}
+					}
+				}
+			);
+			if(ids==""){
+				alert("请选择所要删除的数据.");
+				return;
+			};
+			
+			$.ajax({
+				url:'DelSvlt',
+				type:'post',
+				dataType:'json',
+				data:{"ids":ids,"tbname":"tshiyan"},
+				success:function(data){
+					window.location.href="InitSvlt?tbname=tshiyan";
+					alert(data.msg);
 				}
 			});
 		}
@@ -87,8 +116,12 @@ String path = request.getContextPath();String basePath = request.getScheme()+":/
 										</tr>
 									</table>
 								</td>
-								<td width="60"></td>
-								<td width="52"></td>
+								<td width="52"><table border="0" cellpadding="0" cellspacing="0">
+									<tr>
+										<td class="STYLE1"><div align="center"><a href="javascript:void(0);" onclick="delsbt();return false;"><img src="/customizableSys/images/delete.png" width="14" height="14" /></a></div></td>										
+										<td class="STYLE1"><div align="center"><a href="javascript:void(0);" onclick="delsbt();return false;">删除</a></div></td>
+									</tr>
+								</table></td>
 							</tr>
 						</table>
 					</div></td>
@@ -102,6 +135,8 @@ String path = request.getContextPath();String basePath = request.getScheme()+":/
 						<tr>
 							<td><table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#c9c9c9">
 								<tr>
+									<td width="5%" align="center" bgcolor="#FFFFFF" style="font-size: 12px;">
+									</td>
 									<td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">学期</span></strong></div></td>									
 									<td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">课程</span></strong></div></td>
 									<td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">实验标题</span></strong></div></td>
@@ -109,6 +144,9 @@ String path = request.getContextPath();String basePath = request.getScheme()+":/
 								</tr>
 								<c:forEach var="a" items="${alist }">
 									<tr>
+										<td align="center" height="22" bgcolor="#FFFFFF">
+											<input name="delid" type="checkbox" value="${a.id }"/>
+										</td>
 										<td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3">${a.termname }</span></div></td>
 										<td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3">${a.cname }</span></div></td>
 										<td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3">${a.title }</span></div></td>

@@ -14,6 +14,10 @@ String path = request.getContextPath();String basePath = request.getScheme()+":/
 
 <script type="text/javascript" src="<%=basePath%>lib/jquery/jquery-3.3.1.min.js"></script>
 <script src="/customizableSys/ckeditor5/ckeditor.js"></script>		<!-- 引入web在线文本编辑器的配置文件 -->
+<!-- Tab标签 -->
+<link href="<%=basePath%>/jqueryUIcustom/css/base/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+<script src="<%=basePath%>/jqueryUIcustom/js/jquery-1.8.3.js"></script>
+<script src="<%=basePath%>/jqueryUIcustom/js/jquery-ui-1.9.2.custom.js"></script>
 <%	request.setCharacterEncoding("UTF-8");		
 %>
 <style type="text/css">
@@ -24,7 +28,9 @@ String path = request.getContextPath();String basePath = request.getScheme()+":/
 	}
 </style>
 <script>
-
+$(function() {
+    $( "#tabs" ).tabs();
+  });
 //点击“提交”按钮
 function onSubmit(){				
         var editor=window.editor;
@@ -38,7 +44,7 @@ function onSubmit(){
     		var fnav_id=$('#gotitle_id').val();	
     		var id=$("#sid").val();
     		if(name==""||remark==""||fnav_id=="0"){
-    			alert('二级标题信息不完整。');
+    			alert('信息不完整。');
     			return;
     		}
     		$.ajax({
@@ -67,40 +73,49 @@ function redirect(){
 
 </head>
 <body>
-	<div class="box">
-		
-	   <form >
-		<table>
-			<tr>
-				<td>父标题：</td>
-				<td>						
-					<select id="gotitle_id" name="gotitle_id"  >
-					<option value="0" >选择父标题</option>
-					<c:forEach var='a' items='${otitlelist}'>						
-						<option value="${a.id }">${a.name }</option>
-					</c:forEach>
-					</select>
-				</td>
-			</tr>
-			<tr>	
-				<td>二级标题：</td>
-				<td>
-				<input type="text" name="snav_name" id="snav_name" " size='100'/>				
-				</td>
-			</tr>
-			<tr >
-				<td>内容：</td>
-				<td  ><textarea name="content" id="editor"></textarea></td>
-				
-			</tr>
-			<tr>
-				<td><input type="button" value="新增" onclick="onSubmit()"></td>
-				<td><input type="button" value="取消" onclick="redirect()"></td>
-			</tr>
-		</table>   			
-	   </form>
-<!--  	  <img src="/allProjUpload/customizableSys/editorUploadImage/add.png" >-->
-	</div>
+	<div id="tabs">
+		  <ul>
+		    <li><a href="#tabs-1">添加二级标题</a></li>		    
+		  </ul>
+		  <div id="tabs-1">
+		  		<div class="box">		
+				   <form >
+					<table>
+						<tr>
+							<td width="10%">父标题：</td>
+							<td>						
+								<select id="gotitle_id" name="gotitle_id"  >
+								<option value="0" >选择父标题</option>
+								<c:forEach var='a' items='${otitlelist}'>						
+									<option value="${a.id }">${a.name }</option>
+								</c:forEach>
+								</select>
+							</td>
+						</tr>
+						<tr>	
+							<td width="10%">二级标题：</td>
+							<td>
+							<input type="text" name="snav_name" id="snav_name" " size='100'/>				
+							</td>
+						</tr>
+						<tr >
+							<td width="10%"> 内容：</td>
+							<td  ><textarea name="content" id="editor"></textarea></td>
+							
+						</tr>
+						<tr >
+							<td width="10%"></td>
+							<td align="center"><input type="button" value="新增" onclick="onSubmit()" style="padding:3px 20px;margin-right:30px;">
+								<input type="button" value="取消" onclick="redirect()" style="padding:3px 20px;">
+							</td>
+						</tr>
+					</table>   			
+				   </form>
+			<!--  	  <img src="/allProjUpload/customizableSys/editorUploadImage/add.png" >-->
+				</div>
+					  </div>
+				</div>
+	
 <script>
  				// 加载了适配器			  
 			    class UploadAdapter {
@@ -113,9 +128,7 @@ function redirect(){
 			            data.append('upload', this.loader.file);
 			            data.append('allowSize', 10);//允许图片上传的大小/兆
 			            //alert( this.loader.file.name);	//输出上传图片 的名称
-			            console.log(data);
-			            var test="test";
-			            alert("test="+test);
+			            console.log(data);			           
 			            $.ajax({
 			                url: '/customizableSys/EditorUploadSvlt',
 			                type: 'POST',

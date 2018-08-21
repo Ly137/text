@@ -144,7 +144,7 @@ public class GetDataSvlt extends HttpServlet {
 		}
 		if("students".equals(tbname)){	//学生信息
 			//查询数据库获取想要的信息
-			List<Students> alist=GetList.getlist(Students.class, db.executeQuery("select * from students where id="+id));
+			List<Students> alist=GetList.getlist(Students.class, db.executeQuery("select * from students where id="+id ));
 			//创建对象
 			Students a=new Students();
 			//取查询结果给对象

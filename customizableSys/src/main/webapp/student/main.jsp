@@ -87,6 +87,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		margin-right:10px;
 	}	
 	/*实验任务进度对话框*/
+	.dialog{
+		display:none;
+	}
 	.dialog p{
 		text-align:center;
 	}
@@ -127,7 +130,7 @@ window.onload=function(){
 	if(TaskTipSize != "0"){
 		 $( ".dialog" ).dialog();
 	}
-
+	
  };
  function closeDlg(){
 	 $( ".dialog" ).dialog("close");

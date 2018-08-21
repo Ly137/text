@@ -26,8 +26,8 @@ String path = request.getContextPath();String basePath = request.getScheme()+":/
 //查询
 function cktj(){
 	var userid=${userid};
-	var tbname="repos"+userid;
-	var sqls="select "+tbname+".*,students.sname, terms.termname,course.cname from "+tbname+",students,course,terms where  students.sno=Num and course_id=course.id and repos1.terms_id=terms.id  ";
+	var tbname="reposdate";
+	var sqls="select "+tbname+".*,students.sname, terms.termname,course.cname from "+tbname+",students,course,terms where  students.sno=Num and course_id=course.id and "+tbname+".terms_id=terms.id  ";
 	var termsid=$("#cktermsid").combobox('getValue');
 	if(termsid!="0"){
 		sqls+=" and terms_id="+termsid;

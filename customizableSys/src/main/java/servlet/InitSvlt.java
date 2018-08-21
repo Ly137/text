@@ -176,7 +176,7 @@ public class InitSvlt extends HttpServlet {
 				String sql="";
 				//如果请求来自左侧菜单，查询全部内容
 				if("1".equals(flgs)){
-					session.setAttribute("sql", "select classno,classname, students.* from classinfo, students where 1=1  and classinfo.id=classinfo_id");
+					session.setAttribute("sql", "select classno,classname, students.* from classinfo, students where 1=1  and classinfo.id=classinfo_id  order by sno asc");
 				}
 				//查询结果集转化成链表
 				List<Students> alist=GetList.getlist(Students.class, HandlePage.Sy(db, "10", session,"sql","mysql"));

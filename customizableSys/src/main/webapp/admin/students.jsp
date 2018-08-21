@@ -99,6 +99,7 @@ String path = request.getContextPath();String basePath = request.getScheme()+":/
 			if(classid!="0"){
 				sqls+=" and classinfo.id="+classid;
 			}
+			sqls+=" order by sno asc";
 			$.ajax({
 				url:'CkSvlt',
 				type:'post',

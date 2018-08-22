@@ -125,7 +125,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </style>
 
 <script>
+
+
 window.onload=function(){	
+	
 	var TaskTipSize=${TaskTipSize};
 	if(TaskTipSize != "0"){
 		 $( ".dialog" ).dialog();
@@ -137,7 +140,7 @@ window.onload=function(){
  }
 </script>
 </head>
-<body>
+<body >
 <!-- 顶部标题栏 -->
 <div class="banner" id="banner" >	
     <img class="logo" src="/allProjUpload/customizableSys/LogoImage/logo.png" alt="logo">    
@@ -181,12 +184,13 @@ window.onload=function(){
 	</div>
 	<!-- 右侧内容显示 --> 
 	<div class="col-sm-10 col-xs-12" style="font-size:14px; min-height:550px;min-width:500px;">
-	 <iframe id="SubMenu" src="../bg.jsp" name="SubMenu" frameborder="0" style="vertical-align: middle; 
+	 <iframe id="SubMenu" src="<%=basePath %>InitSvlt?flgs=1&tbname=stutaskinfo" name="SubMenu" frameborder="0" style="vertical-align: middle; 
              text-align: center; width: 100%; background-color:transparent;min-height:550px;" scrolling="auto" >
      </iframe>
     </div>
 </div>
 <!-- 任务提醒对话框 -->
+	
     <div class="dialog" title="实验任务进度提示" >
 	  <p>您共有<span> ${TaskTipSize } </span>个实验任务可完成</p>	  
 	  <p><a href="/customizableSys/InitSvlt?flgs=1&tbname=TaskTip" target='SubMenu' onclick="closeDlg()">立即查看</a></p>

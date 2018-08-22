@@ -88,7 +88,7 @@ String path = request.getContextPath();String basePath = request.getScheme()+":/
 		<tr>
 			<td height="30"><table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr>
-					<td class="STYLE7" style="padding-left: 50px;">实验信息管理</td>
+					<td class="STYLE7" style="padding-left: 50px;">实验管理</td>
 					<td style="padding-right:10px;"><div align="right" style="padding-right: 50px;">
 						<table border="0" align="right" cellpadding="0" cellspacing="0">
 							<tr>

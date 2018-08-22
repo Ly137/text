@@ -73,7 +73,8 @@ function onSubmit(){
     		var courseid=$("#courseid").val();
     		var title =$("#title").val();
     		var deadline=$("#deadline").val();
-    		if(title =="" || remark=="" || deadline==""){
+    		
+    		if(title =="" || remark=="<p>&nbsp;</p>" || deadline==""){
     			alert('作业信息不完整。');
     			return;
     		}

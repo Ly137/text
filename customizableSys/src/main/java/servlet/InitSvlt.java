@@ -313,7 +313,7 @@ public class InitSvlt extends HttpServlet {
 				String sql="";
 				//如果请求来自左侧菜单，查询全部内容
 				if("1".equals(flgs)){
-					session.setAttribute("sql", "select "+tablename+".*,students.sname, terms.termname,course.cname from "+tablename+",students,course,terms where  students.sno=Num and course_id=course.id and "+tablename+".terms_id=terms.id  order by Num desc");
+					session.setAttribute("sql", "select "+tablename+".*,students.sname, terms.termname,course.cname,classinfo.classname from "+tablename+",students,course,terms,classinfo  where classinfo.id=students.classinfo_id and students.sno=Num and course_id=course.id and "+tablename+".terms_id=terms.id  order by Num desc");
 				}
 				//查询结果集转化成链表
 				List<GitDate> alist=GetList.getlist(GitDate.class, HandlePage.Sy(db, "20", session,"sql","mysql"));
@@ -322,7 +322,8 @@ public class InitSvlt extends HttpServlet {
 				request.setAttribute("alist", alist);
 				List<Terms> termslist=GetList.getlist(Terms.class, db.executeQuery("select * from terms"));
 				request.setAttribute("termslist", termslist);
-				
+				List<Classinfo> classinfolist=GetList.getlist(Classinfo.class, db.executeQuery("select * from classinfo"));
+				request.setAttribute("classinfolist", classinfolist);
 				List<Course> courselist=GetList.getlist(Course.class, db.executeQuery("select * from course"));
 				request.setAttribute("courselist", courselist);
 				request.getRequestDispatcher("/teacher/GitDate.jsp").forward(request, response);

@@ -15,6 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="../js/jquery-3.3.1.min.js"></script>
  <script>
 //左侧菜单栏设置
+
  function showHidden1(){
 	 var show = $('.children1').css('display');
 	 $('.children1').css('display',show =='block'?'none':"block");
@@ -104,7 +105,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 height:20px;
 	 margin-right:5px;
 	}
-	.children1, .children2{
+	.children1{
+	padding-left:13px;
+	}
+	 .children2{
 	padding-left:13px;
 	
 	display:none;	
@@ -165,7 +169,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		 </div>
     	 <div  class='parent'>
 			<a href="#" onClick="showHidden1()" class="parent_a">
-			   <img class="P_img1" src="../images/DropdownArrow.png">前台页面管理
+			   <img class="P_img1" src="../images/arrowRight.png">前台页面管理
 			</a>
     	 </div>
 		<div  class='children1'>
@@ -215,7 +219,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	<!-- 右侧内容显示 --> 
 	<div class="col-sm-10 col-xs-12" style="font-size:14px; min-height:550px;min-width:500px;">
-	 <iframe id="SubMenu" src="../bg.jsp" name="SubMenu" frameborder="0" style="vertical-align: middle; 
+	 <iframe id="SubMenu" src="<%=basePath %>InitSvlt?flgs=1&tbname=snav" name="SubMenu" frameborder="0" style="vertical-align: middle; 
              text-align: center; width: 100%; background-color:transparent;min-height:550px;" scrolling="auto" >
      </iframe>
     </div>

@@ -110,10 +110,20 @@ public class UpdSvlt extends HttpServlet {
 				String address=request.getParameter("address");
 				String bgColorCode=request.getParameter("bgColorCode");
 				String wordColorCode=request.getParameter("wordColorCode");
-				System.out.print(tbname);				
+				System.out.print(address);				
 				int bls=db.executeUpdate("update indexshow set title='"+websiteTitle+"',footer_name='"+organization+"',footer_Addr='"+address+"',bgColor='"+bgColorCode+"',wordColor='"+wordColorCode+"' where id="+1);
 				if(bls>0){
 					json.put("msg", "修改成功");
+				}else{
+					json.put("msg", "修改失败");
+				}
+				
+			}
+			if("indexshowimg".equals(tbname)){		//自定义网站风格	
+				String imgpath="(/allProjUpload/customizableSys/LogoImage/banner.png)";
+				int bls=db.executeUpdate("update indexshow set imgpath='"+imgpath+"' where id="+1);
+				if(bls>0){
+					json.put("msg", "修改成功,如未及时更新，请刷新");
 				}else{
 					json.put("msg", "修改失败");
 				}

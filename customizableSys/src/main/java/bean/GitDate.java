@@ -1,7 +1,7 @@
 package bean;
 
 public class GitDate {
-	 private String Login,Num,IssueLabels,FirstTime,org,proj,cname,termname,sname;
+	 private String Login,Num,IssueLabels,FirstTime,org,proj,cname,termname,sname,classname;
 	 private int Id,score,IssueNumber, IssueCount,Events,Additions,Deletions,ReviewComments,Pulls,Commits,ChangedFiles,Comments,terms_id,course_id;
 	 
 	public String getLogin() {
@@ -142,6 +142,12 @@ public class GitDate {
 	}
 	public void setSname(String sname) {
 		this.sname = sname;
+	}
+	public String getClassname() {
+		return classname;
+	}
+	public void setClassname(String classname) {
+		this.classname = classname;
 	}
 	
 	 

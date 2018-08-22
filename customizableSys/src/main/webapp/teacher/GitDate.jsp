@@ -27,10 +27,14 @@ String path = request.getContextPath();String basePath = request.getScheme()+":/
 function cktj(){
 	var userid=${userid};
 	var tbname="reposdate";
-	var sqls="select "+tbname+".*,students.sname, terms.termname,course.cname from "+tbname+",students,course,terms where  students.sno=Num and course_id=course.id and "+tbname+".terms_id=terms.id  ";
+	var sqls="select "+tbname+".*,students.sname, terms.termname,course.cname,classinfo.classname from "+tbname+",students,course,terms,classinfo  where classinfo.id=students.classinfo_id and students.sno=Num and course_id=course.id and "+tbname+".terms_id=terms.id  ";
 	var termsid=$("#cktermsid").combobox('getValue');
 	if(termsid!="0"){
 		sqls+=" and terms_id="+termsid;
+	}
+	var classinfoid=$("#ckclassinfoid").combobox('getValue');
+	if(classinfoid!="0"){
+		sqls+=" and classinfo.id="+classinfoid;
 	}
 	var courseid=$("#ccoursesid").combobox('getValue');
 	if(courseid!="0"){
@@ -64,7 +68,7 @@ function cktj(){
 		<tr>
 			<td height="30"><table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr>
-					<td class="STYLE7" style="padding-left: 50px;">GitHub实验信息</td>
+					<td class="STYLE7" style="padding-left: 50px;">GitHub实验信息管理</td>
 					<td style="padding-right:10px;"><div align="right" style="padding-right: 50px;">
 						<table border="0" align="right" cellpadding="0" cellspacing="0">
 							<tr>
@@ -73,6 +77,14 @@ function cktj(){
 											<option value="0">选择学期</option>
 											<c:forEach var="a" items="${termslist }">
 												<option value="${a.id }">${a.termname }</option>
+											</c:forEach>
+										</select>
+								</td>
+								<td class="STYLE3">
+									班级：<select id="ckclassinfoid" class="ckinput easyui-combobox">
+											<option value="0">选择班级</option>
+											<c:forEach var="ci" items="${classinfolist }">
+												<option value="${ci.id }">${ci.classname }</option>
 											</c:forEach>
 										</select>
 								</td>
@@ -112,6 +124,7 @@ function cktj(){
 								<tr>
 									<td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">序号</span></strong></div></td>
 									<td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">学期</span></strong></div></td>
+									<td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">班级</span></strong></div></td>
 									<td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">课程</span></strong></div></td>
 									<td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">学号</span></strong></div></td>
 									<td height="22" bgcolor="#FFFFFF"><div align="center"><strong><span class="STYLE1">姓名</span></strong></div></td>
@@ -126,6 +139,7 @@ function cktj(){
 									<tr>
 										<td align="center" height="22" bgcolor="#FFFFFF">${index.count }</td>
 										<td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3">${git.termname }</span></div></td>
+										<td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3">${git.classname }</span></div></td>
 										<td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3">${git.cname }</span></div></td>
 										<td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3">${git.num }</span></div></td>
 										<td height="22" bgcolor="#FFFFFF"><div align="center"><span class="STYLE3">${git.sname }</span></div></td>

@@ -141,7 +141,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	<!-- 右侧内容显示 --> 
 	<div class="col-sm-10 col-xs-12" style="font-size:14px; min-height:550px;min-width:500px;">
-	 <iframe id="SubMenu" src="/customizableSys/teacher/bg.jsp" name="SubMenu" frameborder="0" style="vertical-align: middle; 
+	 <iframe id="SubMenu" src="<%=basePath %>InitSvlt?flgs=1&tbname=teacourse" name="SubMenu" frameborder="0" style="vertical-align: middle; 
              text-align: center; width: 100%; background-color:transparent;min-height:550px;" scrolling="auto" >
      </iframe>
     </div>

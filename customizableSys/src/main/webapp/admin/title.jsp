@@ -78,7 +78,8 @@ $(function() {
 						<td  width="5%">背景图片:</td>
 						<td width="40%"><span style="color:#464748;font-size:12px;">(<span style="color:red;">tips</span>：jpg格式)</span>									
 							    <input type="file" name="uploadFile" />
-							    <input type="button" value="更改"  class="uploadbg btn" />						    
+							    <input type="button" value="更改"  class="uploadbg btn" />
+							    <input type="button" value="移除背景图片"  class="removebgimg btn" />							    
 						</td>			
 					</tr>
 				</table>
@@ -178,6 +179,21 @@ $(function () {
 	  })	 
 	 }); 
 });
+//移除背景图片
+$(function(){
+	$(".removebgimg").click(function(){
+		
+		$.ajax({ 
+		url:'UpdSvlt',
+		type:'post',
+		dataType:'json',
+		data:{"tbname":"indexshowimg"},
+		success:function(data){			
+			alert(data.msg);
+		}	 
+		}); 
+	})
+});
 
 //绑定颜色
 var app = angular.module('myApp', []);
@@ -194,7 +210,7 @@ function submit2(){
 	var address=$("#address").val();
 	var bgColorCode=$("#bgColorCode").val();
 	var wordColorCode=$("#wordColorCode").val();
-	alert(websiteTitle+";"+organization+";"+address+";"+bgColorCode+";"+wordColorCode+";")
+	//alert(websiteTitle+";"+organization+";"+address+";"+bgColorCode+";"+wordColorCode+";")
 	$.ajax({
 		url:'UpdSvlt',
 		type:'post',

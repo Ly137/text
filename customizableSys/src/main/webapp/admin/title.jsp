@@ -64,10 +64,11 @@ $(function() {
 		
 					<tr>	
 						<td  width="5%">logo:</td>
-						<td width="40%"><span style="color:#464748;font-size:12px;">(<span style="color:red;">tips</span>：png格式)</span>					
+						<td width="40%"><span style="color:#464748;font-size:12px;">(<span style="color:red;">tips</span>：290*80px.png格式)</span>					
 							    <input type="file" name="uploadFile" />	
-							    <input type="button" value="更改"  class="upload btn"/>			    					    				    
-						</td>							
+							    		    					    				    
+						</td>
+						<td><input type="button" value="更改"  class="upload btn"/>	</td>							
 					</tr>
 				</table>
 			</form>	
@@ -76,11 +77,12 @@ $(function() {
 				<table width="100%">
 					<tr>	
 						<td  width="5%">背景图片:</td>
-						<td width="40%"><span style="color:#464748;font-size:12px;">(<span style="color:red;">tips</span>：jpg格式)</span>									
+						<td width="40%"><span style="color:#464748;font-size:12px;">(<span style="color:red;">tips</span>：1680*1050px.jpg格式)</span>									
 							    <input type="file" name="uploadFile" />
-							    <input type="button" value="更改"  class="uploadbg btn" />
-							    <input type="button" value="移除背景图片"  class="removebgimg btn" />							    
+							   							    
 						</td>			
+						<td> <input type="button" value="更改"  class="uploadbg btn" />
+							    <input type="button" value="移除背景图片"  class="removebgimg btn" /></td>
 					</tr>
 				</table>
 			</form>	

@@ -16,6 +16,7 @@ import com.wm.utils.DbConn;
 import com.wm.utils.GetList;
 
 import bean.GitDate;
+import bean.Httpstatus;
 import bean.ScoreProportion;
 import bean.Teacher;
 import bean.Terms;
@@ -41,6 +42,8 @@ public class testgitSlvt extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		
 		//设置传输数据编码方式
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
@@ -63,18 +66,22 @@ public class testgitSlvt extends HttpServlet {
 		String org=request.getParameter("org");
 		String proj=request.getParameter("proj");
 		//初始化连接数据
+			    //API
+	   /* String[] a= {};
+	    gitrepostats.App.main(a);
+	    System.out.print("执行APP");*/
 		
 	    gitrepostats.App3.main2(GitUsername,TOKEN,CLIENT_ID,CLIENT_SECRET,org,proj);
+	    
+	    
 	    //将数据写到数据库
 	    int tid=userinfo.getId();
 	    int terms_id=Integer.parseInt(request.getParameter("cktermsid"));
 		int course_id=Integer.parseInt(request.getParameter("ccoursesid"));
-	    gitrepostats.ReadCSV.main(tid,org,proj,terms_id,course_id);
+	    gitrepostats.ReadCSV.main(tid,org,proj,course_id,terms_id);
 	    
 	    
-/*	    //API
-	    String[] a= {};
-	    gitrepostats.App.main(a);*/
+
 	    
 	    //统计成绩
 	    //pull占比，满分次数
@@ -107,7 +114,9 @@ public class testgitSlvt extends HttpServlet {
 	    String tablename="reposdate";
 	    String sql="select id,Pulls,Commits,ChangedFiles,Comments from "+tablename+" where org='"+org+"' and proj='"+proj+"' and terms_id="+terms_id+" and course_id="+course_id;
 	    List<GitDate> gitdatelist=GetList.getlist(GitDate.class, db.executeQuery(sql));
-
+	    System.out.print("查询语句="+sql);
+	    System.out.println();
+	    System.out.print("数据长度"+gitdatelist.size());
 	    int flag=0;  //所以成绩都更新完毕
 	    for(int i=0;i<gitdatelist.size();i++) {
 	    	double sum=0;
@@ -158,12 +167,22 @@ public class testgitSlvt extends HttpServlet {
 				flag=1;
 			}		    	
 	    }
-    	
-		if(flag==1) {
+	    
+	    String filepath="E:/installBlock/eclipseEE/eclipse-jee-oxygen-2-win32-x86_64/eclipse/./src/json/" ;
+
+	    if( gitrepostats.DelDirfile.delAllFile(filepath)) {
+	    	System.out.print("删除文件成功！");
+	    	if(flag==1) {
+				json.put("msg", "有数据未更新，请重新操作");
+			}else{
+				json.put("msg", "所有数据更新完毕");
+			}
+	    }
+	    /* if(flag==1) {
 			json.put("msg", "有数据未更新，请重新操作");
 		}else{
 			json.put("msg", "所有数据更新完毕");
-		}
+		}*/
 				
 		
 		out.print(json.toString());

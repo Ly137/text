@@ -179,7 +179,10 @@ window.onload=function(){
 		   </a><br>
 		   <a href="./studentInfo.jsp"  target='SubMenu'> 
 		      <img src="../images/link.png" width=15 height=15  border=1>个人信息
-		   </a><br>		
+		   </a><br>
+		   <a href="../teacher/help.html"  target='_blank'> 
+		      <img src="../images/help.png" width=20 height=20  border=1>帮助中心
+		   </a><br>			
     	</div>
 	</div>
 	<!-- 右侧内容显示 --> 

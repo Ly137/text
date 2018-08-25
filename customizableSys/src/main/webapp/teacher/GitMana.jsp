@@ -51,7 +51,7 @@ function submitGitdate(){
 	var filesFull=$("#filesFull").val();
 	var comments=$("#comments").val();
 	var commentsFull=$("#commentsFull").val();
-	alert("termsid="+cktermsid+"***cid="+ccoursesid);
+	//alert("termsid="+cktermsid+"***cid="+ccoursesid);
 	if(org =="" || proj=="" || cktermsid=="0" || ccoursesid=="0" || pulls=="" || pullsFull=="" || commits=="" || commitsFull=="" || files=="" || filesFull=="" || comments=="" || commentsFull==""){
 		alert("请将信息填写完整");
 		return ;

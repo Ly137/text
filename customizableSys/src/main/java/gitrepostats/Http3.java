@@ -20,6 +20,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import bean.Api;
+import bean.Httpstatus;
 /**
  * @author zengsn
  * @since 8.0
@@ -53,7 +54,9 @@ public class Http3 implements Api3 {
 					HttpEntity entity = response.getEntity();
 					return entity != null ? EntityUtils.toString(entity) : null;
 				} else {
-					throw new ClientProtocolException("Unexpected response status: " + status);					
+					//Httpstatus nowstatus =new Httpstatus();
+					//nowstatus.setStatus(status);
+					throw new ClientProtocolException("Unexpected response status: " + status);																			
 				}
 			}
 

@@ -23,9 +23,9 @@ public interface Api {
 	// public static final String PROJ = "/angular-erp-ui";
 	// public static final String PROJ = "/android-labs";
 	//public static final String PROJ = "/java-web";
-	//public static final String PROJ = "/android-labs-2017";
+	public static final String PROJ = "/android-labs-2017";
 	//public static final String PROJ = "/wechat-miniprogram-hzc-2017";
-	public static final String PROJ = "/web-wechat-2017";
+	//public static final String PROJ = "/android-labs-2018";
 	
 	public static final String USERNAME = "zengsn"; //
 	public static final String TOKEN = "88602906f4b5b5676495cf41929723d9228b2e6a";  //

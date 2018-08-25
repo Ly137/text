@@ -673,15 +673,15 @@ public class App implements Api {
 		jsonFile = new File(file, "/src/json/result.json");
 		writeToFile(jsonFile, JsonUtils.toString(result));
 		//打印result
-		System.out.print(JsonUtils.toString(result));
-		System.out.println();
+		//System.out.print(JsonUtils.toString(result));
+		//System.out.println();
 		
 		// 将结果保存为CSV
 		File csvFile = new File(file, "/src/json/result.csv");
 		writeToFile(csvFile, sb.toString());
 		//打印sb
-		System.out.print(sb.toString());
-		System.out.println();
+		//System.out.print(sb.toString());
+		//System.out.println();
 		// 打印Issue标题
 		for (String title : issueTitleList) {
 			System.out.println(title);

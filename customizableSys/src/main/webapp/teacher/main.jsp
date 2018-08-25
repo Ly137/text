@@ -117,6 +117,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   	 	<img alt="Avatar" src="../images/my.png" style="width:50px;height:50px;border-radius:50% 50%;padding:5px;margin-right:5px;">
 	   	 	<span>您好！${userinfo.tName }</span>
 	 		<a style="margin-left:5px;color:blue" href="../loginOut.jsp">[退出]</a>
+	 		
    		 </div>
 		<div class="menu">
 		   <a href="<%=basePath %>InitSvlt?flgs=1&tbname=teacourse"  target='SubMenu'> 
@@ -136,6 +137,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   </a><br> -->
 		   <a href="./teacherInfo.jsp"  target='SubMenu'> 
 		      <img src="../images/link.png" width=15 height=15  border=1>个人信息
+		   </a><br>	
+		   <a href="./help.html"  target='_blank'> 
+		      <img src="../images/help.png" width=20 height=20  border=1>帮助中心
 		   </a><br>		
     	</div>
 	</div>

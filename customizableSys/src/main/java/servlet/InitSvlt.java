@@ -83,6 +83,14 @@ public class InitSvlt extends HttpServlet {
 			//获取操作标识
 			String tbname=request.getParameter("tbname");
 			String flgs=request.getParameter("flgs");
+			if("title".equals(tbname)){	//一级导航菜单				
+				//如果请求来自左侧菜单，查询全部内容
+				if("1".equals(flgs)){
+					request.getRequestDispatcher("/admin/title.jsp").forward(request, response);
+					return ;
+				}				
+				return;
+			}
 			if("fnav".equals(tbname)){	//一级导航菜单
 				//定义查询语句变量
 				String sql="";
@@ -223,6 +231,16 @@ public class InitSvlt extends HttpServlet {
 				request.getRequestDispatcher("/admin/courseplan.jsp").forward(request, response);
 				return;
 			}
+			if("adminInfo".equals(tbname)){	//一级导航菜单				
+				//如果请求来自左侧菜单，查询全部内容
+				if("1".equals(flgs)){
+					request.getRequestDispatcher("/admin/adminInfo.jsp").forward(request, response);
+					return ;
+				}				
+				return;
+			}
+			
+			
 		/**
 		 * 教师页面操作处理		
 		 */
@@ -329,6 +347,14 @@ public class InitSvlt extends HttpServlet {
 				request.getRequestDispatcher("/teacher/GitDate.jsp").forward(request, response);
 				return;
 			}
+			if("teacherInfo".equals(tbname)){	//一级导航菜单				
+				//如果请求来自左侧菜单，查询全部内容
+				if("1".equals(flgs)){
+					request.getRequestDispatcher("/teacher/teacherInfo.jsp").forward(request, response);
+					return ;
+				}				
+				return;
+			}
 			
 		/**
 		 * 学生页面操作处理		
@@ -433,6 +459,14 @@ public class InitSvlt extends HttpServlet {
 				request.setAttribute("alist", alist);
 				
 				request.getRequestDispatcher("/student/TaskTip.jsp").forward(request, response);
+				return;
+			}
+			if("studentInfo".equals(tbname)){	//一级导航菜单				
+				//如果请求来自左侧菜单，查询全部内容
+				if("1".equals(flgs)){
+					request.getRequestDispatcher("/student/studentInfo.jsp").forward(request, response);
+					return ;
+				}				
 				return;
 			}
 	}

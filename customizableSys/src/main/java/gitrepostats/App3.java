@@ -31,7 +31,7 @@ public class App3 implements Api3 {
 	static boolean hasCommentsDir = false;
 	static boolean hasIssuesDir = false;
 	
-	 public static void main2(String username,String token,String id,String secret ,String org,String proj) {
+	 public static int main2(String username,String token,String id,String secret ,String org,String proj) {
 		    Api api=new Api();
 	    	api.setHTTPS("https://");
 	    	api.setGIT("api.github.com");
@@ -53,19 +53,40 @@ public class App3 implements Api3 {
 	    	api.setPER_PAGE("per_page=");
 	    	api.setPAGE("page=");
 	    	api.setLOGIN_TEACHER(username);
-	    	
-	    	
-	    	main(api);
+	    	/*
+	    	 * 返回String类型
+	    	String flag="true";
+	    	flag=main(api);
+	    	if(flag=="error") {
+	    		return "error";
+	    	}
+	    	return "true";   */
+	    	int flag=0;
+	    	flag=main(api);
+	    	if(flag>=400 && flag<=600) {
+	    		return flag;
+	    	}
+	    	return 0;
 	}
-	 
-	public static void main(Api api) {
-		runAndRun(api);
+	 /*返回String类型	 
+	public static String  main(Api api) {
+		String flag="null";
+		flag=runAndRun(api);
+		if(flag=="error") {
+			return "error";
+		}
+		return "true";
 	}
 
-	public static void runAndRun(Api api) {
+	public static String runAndRun(Api api) {
+		String flag="true";
 		try {
 			System.out.println("Run at " + new Date());
-			run(api);
+			 flag=run(api);
+			if(flag=="error") {
+				return "error";
+			}
+			
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			try {
@@ -77,10 +98,41 @@ public class App3 implements Api3 {
 				e1.printStackTrace();
 			}
 		}
-	}
-
+		return "true";
+	} 
+	*/
+	 public static int  main(Api api) {
+			int flag=0;
+			flag=runAndRun(api);
+			if(flag>=400 && flag<=600) {
+				return flag;
+			}
+			return 0;
+		}
+	public static int runAndRun(Api api) {
+		int flag=0;
+		try {
+			System.out.println("Run at " + new Date());
+			 flag=run(api);
+			if(flag>=400 && 600>=flag) {
+				return flag;
+			}
+			
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			try {
+				System.out.println("Sleep at " + new Date());
+				Thread.sleep(61 * 60 * 1000);
+				runAndRun(api); // run again
+				
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return 0;
+	} 
 	@SuppressWarnings("unchecked")
-	public static void run(Api api) {
+	public static int run(Api api) {
 		
 		
 		// 所有贡献者的数据
@@ -98,6 +150,16 @@ public class App3 implements Api3 {
 				
 				throw new RuntimeException("Take a rest for one hour!");
 			}
+			/*新添加的代码，判断请求是否错误
+			
+			if(resp == "error") {
+				return "error";
+			}*/
+			int f=Integer.parseInt(resp);
+			if(f >=400 && f<=600) {
+				return f;
+			}
+			
 			while (resp != null && resp.startsWith("[")) {
 				List<Map<String, Object>> list = JsonUtils.toList(resp);
 				System.out.println(list.size());
@@ -137,6 +199,14 @@ public class App3 implements Api3 {
 			String resp = Http3.get(url + pages,api);
 			if (resp == null) { // 限制到了，应该停一个小时
 				throw new RuntimeException("Take a rest for one hour!");
+			}
+			//新添加的代码，判断请求是否错误
+		/*	if(resp == "error") {
+				return "error";
+			}*/
+			int f=Integer.parseInt(resp);
+			if(f >=400 && f<=600) {
+				return f;
 			}
 			while (resp != null && resp.startsWith("[")) {
 				List<Map<String, Object>> list = JsonUtils.toList(resp);
@@ -193,6 +263,14 @@ public class App3 implements Api3 {
 				if (resp == null) { // 限制到了，应该停一个小时
 					throw new RuntimeException("Take a rest for one hour!");
 				}
+				//新添加的代码，判断请求是否错误
+			/*	if(resp == "error") {
+					return "error";
+				}*/
+				int f=Integer.parseInt(resp);
+				if(f >=400 && f<=600) {
+					return f;
+				}
 				oneCommitMap = JsonUtils.toMap(resp);
 				writeToFile(jsonFile, JsonUtils.toString(oneCommitMap));
 			} else { // 直接读取文件
@@ -217,6 +295,14 @@ public class App3 implements Api3 {
 					String resp = Http3.get(url,api);
 					if (resp == null) { // 限制到了，应该停一个小时
 						throw new RuntimeException("Take a rest for one hour!");
+					}
+					//新添加的代码，判断请求是否错误
+				/*	if(resp == "error") {
+						return "error";
+					}*/
+					int f=Integer.parseInt(resp);
+					if(f >=400 && f<=600) {
+						return f;
 					}
 					commentsOfCommit = JsonUtils.toList(resp);
 					writeToFile(jsonFile, JsonUtils.toString(commentsOfCommit));
@@ -290,6 +376,14 @@ public class App3 implements Api3 {
 			if (resp == null) { // 限制到了，应该停一个小时
 				throw new RuntimeException("Take a rest for one hour!");
 			}
+			//新添加的代码，判断请求是否错误
+		/*	if(resp == "error") {
+				return "error";
+			}*/
+			int f=Integer.parseInt(resp);
+			if(f >=400 && f<=600) {
+				return f;
+			}
 			boolean end = false;
 			while (resp != null && resp.startsWith("[")) {
 				List<Map<String, Object>> list = JsonUtils.toList(resp);
@@ -336,6 +430,14 @@ public class App3 implements Api3 {
 				if (resp == null) { // 限制到了，应该停一个小时
 					throw new RuntimeException("Take a rest for one hour!");
 				}
+				//新添加的代码，判断请求是否错误
+		/*		if(resp == "error") {
+					return "error";
+				}*/
+				int f=Integer.parseInt(resp);
+				if(f >=400 && f<=600) {
+					return f;
+				}
 				onePullMap = JsonUtils.toMap(resp);
 				writeToFile(jsonFile, JsonUtils.toString(onePullMap));
 			} else { // 直接读取文件
@@ -374,6 +476,14 @@ public class App3 implements Api3 {
 					if (resp == null) { // 限制到了，应该停一个小时
 						throw new RuntimeException("Take a rest for one hour!");
 					}
+					//新添加的代码，判断请求是否错误
+				/*	if(resp == "error") {
+						return "error";
+					}*/
+					int f=Integer.parseInt(resp);
+					if(f >=400 && f<=600) {
+						return f;
+					}
 					commentsOfPull = JsonUtils.toList(resp);
 					writeToFile(jsonFile, JsonUtils.toString(commentsOfPull));
 				} else { // 直接读取文件
@@ -392,6 +502,14 @@ public class App3 implements Api3 {
 					if (resp == null) { // 限制到了，应该停一个小时
 						throw new RuntimeException("Take a rest for one hour!");
 					}
+					//新添加的代码，判断请求是否错误
+				/*	if(resp == "error") {
+						return "error";
+					}*/
+					int f=Integer.parseInt(resp);
+					if(f >=400 && f<=600) {
+						return f;
+					}
 					list = JsonUtils.toList(resp);
 					writeToFile(jsonFile, JsonUtils.toString(list));
 				} else { // 直接读取文件
@@ -408,6 +526,14 @@ public class App3 implements Api3 {
 						String resp = Http3.get(url,api);
 						if (resp == null) { // 限制到了，应该停一个小时
 							throw new RuntimeException("Take a rest for one hour!");
+						}
+						//新添加的代码，判断请求是否错误
+					/*	if(resp == "error") {
+							return "error";
+						}*/
+						int f=Integer.parseInt(resp);
+						if(f >=400 && f<=600) {
+							return f;
 						}
 						commitMap = JsonUtils.toMap(resp);
 						writeToFile(jsonFile, JsonUtils.toString(commitMap));
@@ -444,6 +570,14 @@ public class App3 implements Api3 {
 			String resp = Http3.get(url + pages,api);
 			if (resp == null) { // 限制到了，应该停一个小时
 				throw new RuntimeException("Take a rest for one hour!");
+			}
+			//新添加的代码，判断请求是否错误
+		/*	if(resp == "error") {
+				return "error";
+			}*/
+			int f=Integer.parseInt(resp);
+			if(f >=400 && f<=600) {
+				return f;
 			}
 			boolean end = false;
 			while (resp != null && resp.startsWith("[")) {
@@ -491,6 +625,14 @@ public class App3 implements Api3 {
 				if (resp == null) { // 限制到了，应该停一个小时
 					throw new RuntimeException("Take a rest for one hour!");
 				}
+				//新添加的代码，判断请求是否错误
+			/*	if(resp == "error") {
+					return "error";
+				}*/
+				int f=Integer.parseInt(resp);
+				if(f >=400 && f<=600) {
+					return f;
+				}
 				oneIssueMap = JsonUtils.toMap(resp);
 				// 判断是不是Issue html_url
 				String htmlUrl = (String) oneIssueMap.get("html_url");
@@ -525,6 +667,14 @@ public class App3 implements Api3 {
 				String resp = url != null ? Http3.get(url + "?" + api.getCLIENT_ID_SECRET(),api) : null;
 				if (resp == null) { // 限制到了，应该停一个小时
 					throw new RuntimeException("Take a rest for one hour!");
+				}
+				//新添加的代码，判断请求是否错误
+			/*	if(resp == "error") {
+					return "error";
+				}*/
+				int f=Integer.parseInt(resp);
+				if(f >=400 && f<=600) {
+					return f;
 				}
 				events = JsonUtils.toList(resp);
 				writeToFile(eventsFile, JsonUtils.toString(events));
@@ -768,7 +918,8 @@ public class App3 implements Api3 {
 			System.out.println();
 		}
 		System.out.println("学生人数：" + allData.keySet().size());
-
+		//return "true";
+		return 0;
 	}
 
 	private static File getJsonFile(final String prefix) {
@@ -855,6 +1006,7 @@ public class App3 implements Api3 {
 		}
 		return map == null ? null : map.get(key);
 	}
+	
 }
 
 

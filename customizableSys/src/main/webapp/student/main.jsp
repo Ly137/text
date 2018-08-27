@@ -177,7 +177,7 @@ window.onload=function(){
 		   <a href="<%=basePath %>InitSvlt?flgs=1&tbname=Sscore"  target='SubMenu'> 
 		      <img src="../images/link.png" width=15 height=15  border=1>查看成绩
 		   </a><br>
-		   <a href="./studentInfo.jsp"  target='SubMenu'> 
+		   <a href="<%=basePath %>InitSvlt?flgs=1&tbname=studentInfo"  target='SubMenu'> 
 		      <img src="../images/link.png" width=15 height=15  border=1>个人信息
 		   </a><br>
 		   <a href="../teacher/help.html"  target='_blank'> 

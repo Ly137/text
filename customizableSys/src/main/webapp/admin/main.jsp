@@ -173,7 +173,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</a>
     	 </div>
 		<div  class='children1'>
-		   <a href="./title.jsp" target='SubMenu'> 
+		   <a href="<%=basePath %>InitSvlt?flgs=1&tbname=title" target='SubMenu'> 
 		      <img src="../images/link.png" width=15 height=15  border=1>页面风格管理
 		   </a><br>
 		   <a href="<%=basePath %>InitSvlt?flgs=1&tbname=fnav"  target='SubMenu'> 
@@ -211,7 +211,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   </a>
 		</div>
 		<div  class='parent'>
-			<a href="./adminInfo.jsp"  target='SubMenu' >
+			<a href="<%=basePath %>InitSvlt?flgs=1&tbname=adminInfo"  target='SubMenu' >
 			   个人信息
 			</a>
     	</div>

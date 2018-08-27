@@ -135,7 +135,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- 		   <a href="<%=basePath %>InitSvlt?flgs=1&tbname=Tscore"  target='SubMenu'> 
 		      <img src="../images/link.png" width=15 height=15  border=1>成绩管理
 		   </a><br> -->
-		   <a href="./teacherInfo.jsp"  target='SubMenu'> 
+		   <a href="<%=basePath %>InitSvlt?flgs=1&tbname=teacherInfo"  target='SubMenu'> 
 		      <img src="../images/link.png" width=15 height=15  border=1>个人信息
 		   </a><br>	
 		   <a href="./help.html"  target='_blank'> 

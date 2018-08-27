@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%> <%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
-<link href="../jqueryUIcustom/css/base/jquery-ui-1.9.2.custom.css" rel="stylesheet">
-<script src="../jqueryUIcustom/js/jquery-1.8.3.js"></script>
-<script src="../jqueryUIcustom/js/jquery-ui-1.9.2.custom.js"></script>
+<script type="text/javascript" src="<%=basePath %>/js/jquery-3.3.1.min.js"></script>
+<link href="<%=basePath %>/jqueryUIcustom/css/base/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+<script src="<%=basePath %>/jqueryUIcustom/js/jquery-1.8.3.js"></script>
+<script src="<%=basePath %>/jqueryUIcustom/js/jquery-ui-1.9.2.custom.js"></script>
 <title>教师个人信息</title>
  <script>
   $(function() {
@@ -95,7 +98,7 @@
 			return ;
 		}		
 		$.ajax({
-			url:'../UpdSvlt',
+			url:'<%=basePath %>UpdSvlt',
 			type:'post',
 			dataType:'json',
 			data:{"tbname":"teaInfo","id":num,"tphone":tphone,"flag":"tphone"},
@@ -137,7 +140,7 @@
 			return;
 		}
 		$.ajax({
-			url:'../UpdSvlt',
+			url:'<%=basePath %>UpdSvlt',
 			type:'post',
 			dataType:'json',
 			data:{"tbname":"teaInfo","id":num,"name":name,"newpwd":newpwd,"flag":"pwd"},
@@ -145,7 +148,7 @@
 				if(data.msg=="修改成功"){
 					alert("修改成功,请重新登录");
 					//window.location.href="./login.jsp";
-					window.parent.frames.location.href="../index.jsp" 
+					window.parent.frames.location.href="<%=basePath %>/index.jsp" 
 				}else{
 					alert("请重新提交");
 				}
@@ -169,7 +172,7 @@
 		}
 		//alert(gitUsername+TOKEN+CLIENT_ID+CLIENT_SECRET)
 		$.ajax({
-			url:'../UpdSvlt',
+			url:'<%=basePath %>UpdSvlt',
 			type:'post',
 			dataType:'json',
 			data:{"tbname":"teaInfo","id":num,"gitUsername":gitUsername,"TOKEN":TOKEN,"CLIENT_ID":CLIENT_ID,"CLIENT_SECRET":CLIENT_SECRET,"flag":"git"},

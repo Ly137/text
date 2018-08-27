@@ -70,7 +70,9 @@ function submitGitdate(){
 		dataType:'json',
 		success:function(data){			
 				alert(data.msg);
-				window.location.href="/customizableSys/GetDataSvlt?tbname=tGitDate&org="+org+"&proj="+proj;
+				if(data.msg=="所有数据更新完毕"){
+					window.location.href="/customizableSys/GetDataSvlt?tbname=tGitDate&org="+org+"&proj="+proj;
+				}			
 		}
 	});
 }

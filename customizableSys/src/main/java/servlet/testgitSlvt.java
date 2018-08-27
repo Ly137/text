@@ -70,9 +70,15 @@ public class testgitSlvt extends HttpServlet {
 	   /* String[] a= {};
 	    gitrepostats.App.main(a);
 	    System.out.print("执行APP");*/
-		
-	    gitrepostats.App3.main2(GitUsername,TOKEN,CLIENT_ID,CLIENT_SECRET,org,proj);
-	    
+		int flagg;
+	    flagg=gitrepostats.App3.main2(GitUsername,TOKEN,CLIENT_ID,CLIENT_SECRET,org,proj);
+	    if(flagg==404) {
+	    	json.put("msg", "所访问的资源不存在，请检查GitHub信息、组织库信息、实验库信息是否正确");
+	    }else if(flagg>=500 & flagg<=600) {
+	    	json.put("msg","服务器错误，请重试");
+	    }else {
+	    	json.put("msg","发生错误，请重试");
+	    }
 	    
 	    //将数据写到数据库
 	    int tid=userinfo.getId();

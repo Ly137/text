@@ -55,8 +55,10 @@ public class Http3 implements Api3 {
 					return entity != null ? EntityUtils.toString(entity) : null;
 				} else {
 					//Httpstatus nowstatus =new Httpstatus();
-					//nowstatus.setStatus(status);
-					throw new ClientProtocolException("Unexpected response status: " + status);																			
+					String error=String.valueOf(status);
+					return error;
+					//throw new ClientProtocolException("Unexpected response status: " + status);	
+					
 				}
 			}
 

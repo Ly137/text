@@ -145,7 +145,11 @@
     .footer .address {
       padding-left: 40px;
     }
-
+@media screen and (max-width: 640px) {
+   .top{
+  display:none;
+  
+  }
   </style>
  
 <script>
@@ -354,10 +358,10 @@ function lgtj(){
     <span class="school">建设单位：${other.footer_name }</span>
     <span class="address">${other.footer_Addr }</span>
   </div>
-<a href="#banner" style="background-image:url();
+<span class="top"><a  href="#banner" style="background-image:url();
 background-repeat:no-repeat;width:20px;height:20px;display:inline-block; float:right;
 position: fixed; top: 500px;right:60px; " ><img style="width:40px;height:40px;"alt="top"
- src="./css/images/top.png"></a>	
+ src="./css/images/top.png"></a></span>	
   <!-- jquery -->
   <script src="./js/jquery.min.js.下载"></script>
   <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->

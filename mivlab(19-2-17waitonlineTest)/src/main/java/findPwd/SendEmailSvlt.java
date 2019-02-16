@@ -83,7 +83,7 @@ public class SendEmailSvlt extends HttpServlet {
 						@Override
 						protected PasswordAuthentication getPasswordAuthentication() {
 							//返回发件人账号与密码信息
-							return new PasswordAuthentication("1370763849@qq.com","gjdavgrjavugbadh");
+							return new PasswordAuthentication("1370763849@qq.com","xxx");
 						}
 					}
 				);

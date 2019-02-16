@@ -91,7 +91,7 @@ public class FindPwdByEmailSvlt extends HttpServlet {
 								@Override
 								protected PasswordAuthentication getPasswordAuthentication() {
 									//返回发件人账号与密码信息
-									return new PasswordAuthentication("1370763849@qq.com","ryahtuoowaqzhfbf");
+									return new PasswordAuthentication("1370763849@qq.com","xxx");
 								}
 							}
 						);
